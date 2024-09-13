@@ -15,7 +15,7 @@ const {
     fetchTrees,
     fetchReviews,
     fetchComments,
-} = require('./users')
+} = require('./users_db')
 const { db } = require('./client')
 
 const express = require("express");
@@ -174,23 +174,23 @@ app.use((err, req, res, next) => {
 });
 
 // const init = async () => {
-    // const port = process.env.PORT || 3000;
-    // await db.connect();
-    // console.log("connected to database");
+// const port = process.env.PORT || 3000;
+// await db.connect();
+// console.log("connected to database");
 
-    // await createTables();
-    // console.log("tables created");
+// await createTables();
+// console.log("tables created");
 
-    // const [] = await Promise.all(
-    //     [
+// const [] = await Promise.all(
+//     [
 
-    //     ]
-    // );
+//     ]
+// );
 
-    // console.log(await fetchUsers());
-    // console.log(await fetchTrees());
+// console.log(await fetchUsers());
+// console.log(await fetchTrees());
 
-    // console.log(await fetchReviews());
+// console.log(await fetchReviews());
 
 //     app.listen(port, () => console.log(`listening on port ${port}`));
 // };

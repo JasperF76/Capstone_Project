@@ -1,5 +1,6 @@
 const db = require('./client');
-const { createUser } = require('./users');
+const { createUser } = require('./users_db');
+const { createTree } = require('./trees_db');
 
 const users = [
   {
@@ -29,6 +30,29 @@ const users = [
   },
   // Add more user objects as needed
 ];
+
+const trees = [
+  {
+    treeName: 'Brigadier General Charles Young Tree',
+    location: 'Sequoia & Kings Canyon National Parks',
+  },
+  {
+    treeName: 'The Cypress Tree Tunnel',
+    location: 'Point Reyes National Seashore',
+  },
+  {
+    treeName: 'General Grant Tree',
+    location: 'Sequoia & Kings Canyon National Parks',
+  },
+  {
+    treeName: 'Chimney Tree',
+    location: 'Sequoia & Kings Canyon National Parks',
+  },
+  {
+    treeName: 'Big Tree Wayside',
+    location: 'Redwood National and State Parks',
+  },
+]
 
 // const dropTables = async () => {
 //     try {
@@ -64,10 +88,10 @@ const createTables = async () => {
   DROP TABLE IF EXISTS comments;
 
   CREATE TABLE users (
-  id UUID PRIMARY KEY,
-  username VARCHAR(255) UNIQUE NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL
+      id UUID PRIMARY KEY,
+      username VARCHAR(255) UNIQUE NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL
   );
 
   CREATE TABLE trees (
@@ -104,12 +128,24 @@ const insertUsers = async () => {
   }
 };
 
+const insertTrees = async () => {
+  try {
+    for (const tree of trees) {
+      await createTree({ treeName: tree.treeName, location: tree.location });
+    }
+    console.log('Seed data inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
+
 const seedDatabse = async () => {
   try {
     db.connect();
     // await dropTables();
     await createTables();
     await insertUsers();
+    await insertTrees();
   }
   catch (err) {
     throw err;

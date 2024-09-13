@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const usersRouter = express.Router();
 
 const {
@@ -6,7 +6,7 @@ const {
     getUser,
     getUserByEmail,
     getAllUsers
-} = require('../db/users');
+} = require('../db/users_db');
 
 const jwt = require('jsonwebtoken')
 
@@ -106,14 +106,16 @@ usersRouter.post('/register', async (req, res, next) => {
             token
         });
     } catch (error) {
-        next({ name: error.name,
-            message: error.message })
+        next({
+            name: error.name,
+            message: error.message
+        })
     }
 });
 
 usersRouter.get("/me", (req, res, next) => {
 
-    
+
     try {
         if (!req.user) {
             return res.status(401).send({
@@ -125,7 +127,7 @@ usersRouter.get("/me", (req, res, next) => {
             message: 'Data successfully retrieved.',
             user: req.user
         });
-            
+
     } catch (error) {
         console.error('Error');
         next({
