@@ -15,6 +15,12 @@ db.connect()
 const apiRouter = require('./api');
 app.use('/api', apiRouter);
 
+const usersRouter = require('./api');
+app.use('/api/users', usersRouter);
+
+const treesRouter = require('./api');
+app.use('/api/trees', treesRouter);
+
 router.listen(app, 3000, () =>
   console.log('Server is listening on port 3000...')
 );

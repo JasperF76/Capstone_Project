@@ -12,12 +12,18 @@ apiRouter.use(async (req, res, next) => {
   if (!auth) { 
     next();
   } 
-  else if (auth.startsWith('REPLACE_ME')) {
+  else if (auth.startsWith('Bearer')) {
     // TODO - Get JUST the token out of 'auth'
-    const token = 'REPLACE_ME';
+    const token = auth.split(' ')[1];
     
     try {
-      const parsedToken = 'REPLACE_ME';
+      const { id } = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await findUserWithToken(token);
+      if (user) {
+        req.user = user;
+      }
+
+      next();
       // TODO - Call 'jwt.verify()' to see if the token is valid. If it is, use it to get the user's 'id'. Look up the user with their 'id' and set 'req.user'
 
     } catch (error) {
@@ -32,7 +38,26 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
+apiRouter.post("/api/auth/register", async (req, res, next) => {
+  try {
+      res.send(await createUserAndGenerateToken(req.body));
+  } catch (ex) {
+      next(ex);
+  }
+});
+
+apiRouter.post("/api/auth/login", async (req, res, next) => {
+  try {
+      res.send(await authenticate(req.body));
+  } catch (ex) {
+      next(ex);
+  }
+});
+
 const usersRouter = require('./users');
+const { findUserWithToken,
+        createUserAndGenerateToken
+ } = require('../db/users');
 apiRouter.use('/users', usersRouter);
 
 apiRouter.use((err, req, res, next) => {
