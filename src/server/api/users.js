@@ -69,9 +69,9 @@ usersRouter.post('/login', async (req, res, next) => {
 });
 
 usersRouter.post('/register', async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
         return res.status(400).send({
             name: 'MissingFieldsError',
             message: 'Please provide a name, email, and password',
@@ -89,7 +89,7 @@ usersRouter.post('/register', async (req, res, next) => {
         }
 
         const user = await createUser({
-            name,
+            username,
             email,
             password
         });

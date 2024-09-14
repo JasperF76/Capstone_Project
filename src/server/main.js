@@ -18,7 +18,7 @@ app.use('/api', apiRouter);
 const usersRouter = require('./api');
 app.use('/api/users', usersRouter);
 
-const treesRouter = require('./api');
+const treesRouter = require('./api/trees');
 app.use('/api/trees', treesRouter);
 
 router.listen(app, 3000, () =>

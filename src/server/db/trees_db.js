@@ -7,11 +7,11 @@ const JWT_SECRET = process.env.JWT;
 
 const createTree = async ({ treeName, location }) => {
     const SQL = /* sql */ `
-    INSERT INTO trees(id, treeName, location)
-    VALUES($1, $2, $3)
+    INSERT INTO trees(treeName, location)
+    VALUES($1, $2)
     RETURNING *
     `;
-    const response = await db.query(SQL, [uuid.v4(), treeName, location]);
+    const response = await db.query(SQL, [treeName, location]);
     return response.rows[0];
 };
 
@@ -76,7 +76,7 @@ const deleteComment = async ({ review_id, id }) => {
 
 const getAllTrees = async () => {
     const SQL = /* sql */ `
-    SELECT id, treeName, location
+    SELECT *
     FROM trees
     `;
     const response = await db.query(SQL);
@@ -102,6 +102,22 @@ const fetchComments = async (review_id) => {
     const response = await db.query(SQL, [review_id]);
 };
 
+const getTreeById = async (id) => {
+    try {
+        const { rows: [tree] } = await db.query(`
+        SELECT *
+        FROM trees
+        WHERE id=$1;`, [id]);
+
+        if (!tree) {
+            return null;
+        }
+        return tree;
+    } catch (err) {
+        throw err;
+    }
+}
+
 module.exports = {
     createTree,
     createReview,
@@ -112,5 +128,6 @@ module.exports = {
     deleteComment,
     getAllTrees,
     fetchReviews,
-    fetchComments
+    fetchComments,
+    getTreeById
 }

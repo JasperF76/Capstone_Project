@@ -97,20 +97,28 @@ const findUserWithToken = async (token) => {
 
 const getUser = async ({ email, password }) => {
     if (!email || !password) {
-        return;
+        console.error('Missing email or password');
+        return null;
     }
     try {
         const user = await getUserByEmail(email);
-        if (!user) return;
+        if (!user) {console.log('User not found');
+            return null;
+        };
         const hashedPassword = user.password;
         const passwordsMatch = await bcrypt.compare(password, hashedPassword);
-        if (!passwordsMatch) return;
+        
+        if (!passwordsMatch) {
+            console.log('Incorrect password');
+            return null;
+        };
         delete user.password;
         return user;
     } catch (err) {
+        console.error('Error during user authentication', err);
         throw err;
     }
-}
+};
 
 const getUserByEmail = async (email) => {
     try {

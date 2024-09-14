@@ -95,7 +95,7 @@ const createTables = async () => {
   );
 
   CREATE TABLE trees (
-      id UUID PRIMARY KEY,
+      id SERIAL PRIMARY KEY,
       treeName VARCHAR(255) UNIQUE NOT NULL,
       location VARCHAR(255) NOT NULL
   );
@@ -105,7 +105,7 @@ const createTables = async () => {
       text VARCHAR(1000),
       rating INTEGER DEFAULT 3 NOT NULL CHECK (rating BETWEEN 1 AND 5),
       user_id UUID REFERENCES users(id) NOT NULL,
-      tree_id UUID REFERENCES trees(id) NOT NULL
+      tree_id SERIAL REFERENCES trees(id) NOT NULL
   );
 
   CREATE TABLE comments (

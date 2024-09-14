@@ -10,7 +10,8 @@ const express = require('express');
 const treesRouter = express.Router();
 
 const {
-    getAllTrees
+    getAllTrees,
+    getTreeById
 } = require('../db/trees_db')
 
 treesRouter.get('/', async (req, res, next) => {
@@ -30,11 +31,39 @@ treesRouter.get('/', async (req, res, next) => {
         console.error('Error fetching trees:', error);
 
         next({
-            name: error.name || 'FetchTreesError',
-            message: error.message || 'There was an error fetching trees',
+            name: error.name,
+            message: error.message,
             status: 500
         });
     }
 });
+
+treesRouter.get('/:id', async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+        const tree = await getTreeById(id);
+
+        if (!tree) {
+            return res.status(404).send({
+                message: 'Tree not found'
+            });
+        }
+
+        res.status(200).send({
+            tree
+        });
+    } catch (error) {
+        console.error('Error fetching tree:', error);
+
+        next({
+            name: error.name,
+            message: error.message,
+            status: 500
+        });
+    }
+});
+
+treesRouter.get('/:item_id')
 
 module.exports = treesRouter;
