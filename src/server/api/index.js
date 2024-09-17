@@ -8,6 +8,7 @@ apiRouter.use(volleyball)
 // TO BE COMPLETED - set `req.user` if possible, using token sent in the request header
 apiRouter.use(async (req, res, next) => {
   const auth = req.header('Authorization');
+  // console.log(auth, "auth");
 
   if (!auth) {
     next();
@@ -17,10 +18,14 @@ apiRouter.use(async (req, res, next) => {
     const token = auth.split(' ')[1];
 
     try {
-      const { id } = jwt.verify(token, process.env.JWT_SECRET);
+      // const { id } = jwt.verify(token, process.env.JWT_SECRET);
       const user = await findUserWithToken(token);
+      console.log(user, "user");
+
       if (user) {
         req.user = user;
+        console.log("Authenticated user:", req.user);
+        
       }
 
       next();
@@ -38,21 +43,21 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
-apiRouter.post("/api/auth/register", async (req, res, next) => {
-  try {
-    res.send(await createUserAndGenerateToken(req.body));
-  } catch (ex) {
-    next(ex);
-  }
-});
+// apiRouter.post("/api/auth/register", async (req, res, next) => {
+//   try {
+//     res.send(await createUserAndGenerateToken(req.body));
+//   } catch (ex) {
+//     next(ex);
+//   }
+// });
 
-apiRouter.post("/api/auth/login", async (req, res, next) => {
-  try {
-    res.send(await authenticate(req.body));
-  } catch (ex) {
-    next(ex);
-  }
-});
+// apiRouter.post("/api/auth/login", async (req, res, next) => {
+//   try {
+//     res.send(await authenticate(req.body));
+//   } catch (ex) {
+//     next(ex);
+//   }
+// });
 
 const usersRouter = require('./users');
 const { findUserWithToken,

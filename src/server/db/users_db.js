@@ -1,9 +1,10 @@
+require('dotenv').config();
 const db = require('./client')
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 const uuid = require("uuid");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT;
+const JWT_SECRET = process.env.JWT_SECRET
 
 // const createUser = async({ name='first last', email, password }) => {
 //     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
@@ -42,9 +43,9 @@ const createUser = async ({ username, email, password }) => {
 
 const createUserAndGenerateToken = async ({ username, password }) => {
     try {
-    const user = await createUser({ username, password });
-    const token = await jwt.sign({ id: user.id }, JWT_SECRET, {expiresIn: '1h'});
-    return { token };
+        const user = await createUser({ username, password });
+        const token = await jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
+        return { token };
     } catch (err) {
         console.error('Error creating user and generating token:', err);
         throw err;
@@ -71,6 +72,7 @@ const authenticate = async ({ username, password }) => {
 };
 
 const findUserWithToken = async (token) => {
+
     let id;
     try {
         const payload = await jwt.verify(token, JWT_SECRET);
@@ -102,12 +104,13 @@ const getUser = async ({ email, password }) => {
     }
     try {
         const user = await getUserByEmail(email);
-        if (!user) {console.log('User not found');
+        if (!user) {
+            console.log('User not found');
             return null;
         };
         const hashedPassword = user.password;
         const passwordsMatch = await bcrypt.compare(password, hashedPassword);
-        
+
         if (!passwordsMatch) {
             console.log('Incorrect password');
             return null;
@@ -134,7 +137,41 @@ const getUserByEmail = async (email) => {
     } catch (err) {
         throw err;
     }
-}
+};
+
+const getReviewsByUserId = async (userId) => {
+    try {
+        console.log("Querying reviews for user_id:", userId);
+        const reviews = await db.query(`
+        SELECT * 
+        FROM reviews
+        WHERE user_id=$1;`, [userId]);
+
+        if (!reviews) {
+            return null;
+        }
+        return reviews.rows;
+    } catch (err) {
+        throw err;
+    }
+};
+
+const getCommentsByUserId = async (userId) => {
+    try {
+        console.log("Querying comments for user_id:", userId);
+        const comments = await db.query(`
+        SELECT * 
+        FROM comments
+        WHERE user_id=$1;`, [userId]);
+
+        if (!comments) {
+            return null;
+        }
+        return comments.rows;
+    } catch (err) {
+        throw err;
+    }
+};
 
 const getAllUsers = async () => {
     const SQL = /* sql */ `
@@ -152,6 +189,8 @@ module.exports = {
     getUser,
     getAllUsers,
     getUserByEmail,
+    getReviewsByUserId,
+    getCommentsByUserId,
     createUserAndGenerateToken,
     findUserWithToken,
     authenticate

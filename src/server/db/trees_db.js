@@ -9,13 +9,20 @@ const createTree = async ({ treeName, location }) => {
     const SQL = /* sql */ `
     INSERT INTO trees(treeName, location)
     VALUES($1, $2)
-    RETURNING *
+    RETURNING id;
     `;
     const response = await db.query(SQL, [treeName, location]);
-    return response.rows[0];
+    return response.rows[0].id;
 };
 
 const createReview = async ({ text, rating, user_id, tree_id }) => {
+    // console.log('Review Data:', { text, rating, user_id, tree_id });
+
+    console.log(rating);
+
+    if (typeof rating !== 'number' || rating < 1 || rating > 5) {
+        throw new Error(`Invalid rating value. Rating must be a number between 1 and 5.${rating}`)
+    };
     const SQL = /* sql */ `
     INSERT INTO reviews(id, text, rating, user_id, tree_id)
     VALUES($1, $2, $3, $4, $5)
@@ -44,13 +51,13 @@ const deleteReview = async ({ user_id, id }) => {
     await db.query(SQL, [user_id, id]);
 };
 
-const createComment = async ({ text, review_id }) => {
+const createComment = async ({ text, review_id, user_id }) => {
     const SQL = /* sql */ `
-    INSERT INTO comments(id, text, review_id)
-    VALUES($1, $2, $3)
+    INSERT INTO comments(id, text, review_id, user_id)
+    VALUES($1, $2, $3, $4)
     RETURNING *
     `;
-    const response = await db.query(SQL, [uuid.v4(), text, review_id]);
+    const response = await db.query(SQL, [uuid.v4(), text, review_id, user_id]);
     return response.rows[0];
 };
 
@@ -83,17 +90,17 @@ const getAllTrees = async () => {
     return response.rows;
 };
 
-const fetchReviews = async (user_id) => {
+const getAllReviews = async (tree_id) => {
     const SQL = /* sql */ `
     SELECT *
     FROM reviews
-    WHERE user_id = $1
+    WHERE tree_id = $1
     `;
-    const response = await db.query(SQL, [user_id]);
+    const response = await db.query(SQL, [tree_id]);
     return response.rows;
 };
 
-const fetchComments = async (review_id) => {
+const getAllComments = async (review_id) => {
     const SQL = /* sql */ `
     SELECT *
     FROM comments
@@ -127,7 +134,7 @@ module.exports = {
     editComment,
     deleteComment,
     getAllTrees,
-    fetchReviews,
-    fetchComments,
+    getAllReviews,
+    getAllComments,
     getTreeById
 }

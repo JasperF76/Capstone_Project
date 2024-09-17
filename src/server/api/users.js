@@ -5,11 +5,14 @@ const {
     createUser,
     getUser,
     getUserByEmail,
+    getReviewsByUserId,
+    getCommentsByUserId,
     getAllUsers
 } = require('../db/users_db');
 
 const jwt = require('jsonwebtoken')
 
+// This route returns all users.
 usersRouter.get('/', async (req, res, next) => {
     try {
         const users = await getAllUsers();
@@ -34,6 +37,7 @@ usersRouter.get('/', async (req, res, next) => {
     }
 });
 
+// This route allows a user to log in with their email and password.
 usersRouter.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -68,6 +72,7 @@ usersRouter.post('/login', async (req, res, next) => {
     }
 });
 
+// This route allows a user to register an account.
 usersRouter.post('/register', async (req, res, next) => {
     const { username, email, password } = req.body;
 
@@ -113,9 +118,8 @@ usersRouter.post('/register', async (req, res, next) => {
     }
 });
 
-usersRouter.get("/me", (req, res, next) => {
-
-
+// This route returns a user's account details.
+usersRouter.get("/me", async (req, res, next) => {
     try {
         if (!req.user) {
             return res.status(401).send({
@@ -123,10 +127,26 @@ usersRouter.get("/me", (req, res, next) => {
                 message: 'You are not logged in.'
             });
         }
-        res.status(200).send({
+
+        const user = req.user;
+        console.log(user);
+        
+        const userReviews = await getReviewsByUserId(user.id);
+        console.log(userReviews);
+        
+        const userComments = await getCommentsByUserId(user.id);
+
+        const responseData = {
             message: 'Data successfully retrieved.',
-            user: req.user
-        });
+            user: {
+                id: user.id,
+                username: user.username,
+                reviews: userReviews,
+                comments: userComments
+            }
+        };
+
+        res.status(200).send(responseData);
 
     } catch (error) {
         console.error('Error');
