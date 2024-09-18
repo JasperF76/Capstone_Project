@@ -2,98 +2,6 @@ const db = require('./client');
 const { createUser } = require('./users_db');
 const { createTree, createReview, createComment } = require('./trees_db');
 
-// const users = [
-//   {
-//     username: 'EmiJo',
-//     email: 'emily@example.com',
-//     password: 'securepass',
-//   },
-//   {
-//     username: 'LiuWei',
-//     email: 'liu@example.com',
-//     password: 'strongpass',
-//   },
-//   {
-//     username: 'IsaGarcía',
-//     email: 'bella@example.com',
-//     password: 'pass1234',
-//   },
-//   {
-//     username: 'Mohamm Ahm',
-//     email: 'mohammed@example.com',
-//     password: 'mysecretpassword',
-//   },
-//   {
-//     username: 'JoSmit',
-//     email: 'john@example.com',
-//     password: 'password123',
-//   },
-//   // Add more user objects as needed
-// ];
-
-// const trees = [
-//   {
-//     treeName: 'Brigadier General Charles Young Tree',
-//     location: 'Sequoia & Kings Canyon National Parks',
-//   },
-//   {
-//     treeName: 'The Cypress Tree Tunnel',
-//     location: 'Point Reyes National Seashore',
-//   },
-//   {
-//     treeName: 'General Grant Tree',
-//     location: 'Sequoia & Kings Canyon National Parks',
-//   },
-//   {
-//     treeName: 'Chimney Tree',
-//     location: 'Sequoia & Kings Canyon National Parks',
-//   },
-//   {
-//     treeName: 'Big Tree Wayside',
-//     location: 'Redwood National and State Parks',
-//   },
-// ]
-
-// const reviews = [
-//   {
-//     text: 'Beautiful tree, a must-see!',
-//     rating: 5,
-//     user_id: userIds[0],
-//     tree_id: treeIds[0]
-//   },
-//   {
-//     text: 'The tree is majestic, but the path was crowded.',
-//     rating: 4,
-//     user_id: userIds[1],
-//     tree_id: treeIds[0]
-//   }
-// ]
-
-// const dropTables = async () => {
-//     try {
-//         await db.query(`
-//         DROP TABLE IF EXISTS users;
-//         `)
-//     }
-//     catch(err) {
-//         throw err;
-//     }
-// }
-
-// const createTables = async () => {
-//     try{
-//         await db.query(`
-//         CREATE TABLE users(
-//             id SERIAL PRIMARY KEY,
-//             name VARCHAR(255) DEFAULT 'name',
-//             email VARCHAR(255) UNIQUE NOT NULL,
-//             password VARCHAR(255) NOT NULL
-//         )`)
-//     }
-//     catch(err) {
-//         throw err;
-//     }
-// }
 
 const createTables = async () => {
   const SQL = /* sql */ `
@@ -288,27 +196,27 @@ const insertComments = async (reviewIds, userIds) => {
       {
         text: 'I agree, this tree is amazing!',
         review_id: reviewIds[0].id,
-        user_id: userIds[0]
+        user_id: userIds[4]
       },
       {
         text: 'I went on a Tuesday, and did not have any issues.',
         review_id: reviewIds[1].id,
-        user_id: userIds[1]
+        user_id: userIds[3]
       },
       {
         text: 'It was pretty cool to look at, but it was just a tree, bro',
         review_id: reviewIds[2].id,
-        user_id: userIds[2]
+        user_id: userIds[1]
       },
       {
         text: 'Were we looking at the same tree?',
         review_id: reviewIds[3].id,
-        user_id: userIds[3]
+        user_id: userIds[2]
       },
       {
         text: 'If I am blind, does that mean I need a new graphics card? :D',
         review_id: reviewIds[4].id,
-        user_id: userIds[4]
+        user_id: userIds[0]
       },
     ];
 
@@ -320,7 +228,7 @@ const insertComments = async (reviewIds, userIds) => {
       });
 
       console.log('Comment created:', createdComment);
-      
+
 
     }
     console.log('Seed data inserted successfully.');
