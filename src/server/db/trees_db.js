@@ -5,13 +5,13 @@ const uuid = require("uuid");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT;
 
-const createTree = async ({ treeName, location }) => {
+const createTree = async ({ treeName, location, description }) => {
     const SQL = /* sql */ `
-    INSERT INTO trees(treeName, location)
-    VALUES($1, $2)
+    INSERT INTO trees(treeName, location, description)
+    VALUES($1, $2, $3)
     RETURNING id;
     `;
-    const response = await db.query(SQL, [treeName, location]);
+    const response = await db.query(SQL, [treeName, location, description]);
     return response.rows[0].id;
 };
 
@@ -35,15 +35,16 @@ const createReview = async ({ text, rating, user_id, tree_id }) => {
 const editReview = async ({ review_id, new_text, new_rating }) => {
     const SQL = /* sql */ `
     UPDATE reviews
-    SET text = new_text
-    SET rating = new_rating
-    WHERE id = review_id
+    SET text = $2, rating = $3
+    WHERE id = $1
     RETURNING *
     `;
-    const response = await db.query(SQL, [uuid.v4(), review_id, new_text, new_rating]);
+    const response = await db.query(SQL, [review_id, new_text, new_rating]);
+    return response.rows[0];
 };
 
 const deleteReview = async ({ user_id, id }) => {
+    
     const SQL = /* sql */ `
     DELETE FROM reviews
     WHERE user_id=$1 AND id=$2
@@ -64,20 +65,21 @@ const createComment = async ({ text, review_id, user_id }) => {
 const editComment = async ({ comment_id, new_text }) => {
     const SQL = /* sql */ `
     UPDATE comments
-    SET text = new_text
-    WHERE id = comment_id
+    SET text = $2
+    WHERE id = $1
     RETURNING *
     `;
-    const response = await db.query(SQL, [uuid.v4(), comment_id, new_text]);
+    const response = await db.query(SQL, [comment_id, new_text]);
+    return response.rows[0];
 };
 
-const deleteComment = async ({ review_id, id }) => {
+const deleteComment = async ({ user_id, id }) => {
     const SQL = /* sql */ `
     DELETE FROM comments
-    WHERE review_id=$1 AND id=$2
+    WHERE user_id=$1 AND id=$2
     `;
-    await db.query(SQL, [review_id, id])
-}
+    await db.query(SQL, [user_id, id]);
+};
 
 
 

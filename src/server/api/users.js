@@ -10,7 +10,8 @@ const {
     getAllUsers
 } = require('../db/users_db');
 
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { editReview, editComment, deleteReview, deleteComment } = require('../db/trees_db');
 
 // This route returns all users.
 usersRouter.get('/', async (req, res, next) => {
@@ -130,10 +131,10 @@ usersRouter.get("/me", async (req, res, next) => {
 
         const user = req.user;
         console.log(user);
-        
+
         const userReviews = await getReviewsByUserId(user.id);
         console.log(userReviews);
-        
+
         const userComments = await getCommentsByUserId(user.id);
 
         const responseData = {
@@ -154,6 +155,114 @@ usersRouter.get("/me", async (req, res, next) => {
             name: error.name,
             message: error.message
         });
+    }
+});
+
+// This route allows a user to edit their review.
+
+usersRouter.put("/:user_id/reviews/:review_id", async (req, res, next) => {
+    const { review_id, user_id } = req.params;
+    console.log("review id", review_id);
+    console.log("user id", user_id);
+
+    try {
+        if (!req.user || req.user.id !== user_id) {
+            const error = Error('You cannot edit this review.');
+            error.status = 401;
+            throw error;
+        }
+
+        const editedReview = await editReview({
+            review_id: review_id,
+            new_text: req.body.new_text,
+            new_rating: req.body.new_rating,
+        });
+
+        if (!editedReview) {
+            return res.status(404).send({
+                message: 'Review not found or could not be updated.',
+            });
+        }
+        res.status(201).send(editedReview);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+// This route allows a user to edit their comment.
+usersRouter.put("/:user_id/comments/:comment_id", async (req, res, next) => {
+    const { comment_id, user_id } = req.params;
+    console.log("comment id", comment_id);
+    console.log("user id", user_id);
+
+    try {
+        if (!req.user || req.user.id !== user_id) {
+            const error = Error('You cannot edit this comment.');
+            error.status = 401;
+            throw error;
+        }
+
+        const editedComment = await editComment({
+            comment_id: comment_id,
+            new_text: req.body.new_text,
+        });
+
+        if (!editedComment) {
+            return res.status(404).send({
+                message: 'Comment not found or could not be updated.',
+            });
+        }
+        res.status(201).send(editedComment);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+usersRouter.delete("/:user_id/reviews/:id", async (req, res, next) => {
+    try {
+        const { id, user_id } = req.params;
+        console.log("review id", id);
+        console.log("user id", user_id);
+        
+        
+        if (!req.user || req.user.id !== user_id) {
+            const error = Error("Not authorized");
+            error.status = 401;
+            throw error;
+        }
+        await deleteReview({
+            user_id: user_id,
+            id: id,
+        });
+        res.sendStatus(204);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+usersRouter.delete("/:user_id/comments/:id", async (req, res, next) => {
+    try {
+        const { user_id, id } = req.params;
+        console.log("comment id", id);
+        console.log("user id", user_id);
+        
+        
+        if (!req.user || req.user.id !== user_id) {
+            const error = Error("Not authorized");
+            error.status = 401;
+            throw error;
+        }
+        await deleteComment({
+            user_id: user_id,
+            id: id,
+        });
+        res.sendStatus(204);
+
+    } catch (error) {
+        next(error);
     }
 });
 
