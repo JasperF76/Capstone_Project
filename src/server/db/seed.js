@@ -383,8 +383,8 @@ const insertComments = async (reviewIds, userIds) => {
         review_id: reviewIds[14].id,
         user_id: userIds[0]
       },
-  ];
-  
+    ];
+
     for (const comment of comments) {
       const createdComment = await createComment({
         text: comment.text,

@@ -43,25 +43,8 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
-// apiRouter.post("/api/auth/register", async (req, res, next) => {
-//   try {
-//     res.send(await createUserAndGenerateToken(req.body));
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
-
-// apiRouter.post("/api/auth/login", async (req, res, next) => {
-//   try {
-//     res.send(await authenticate(req.body));
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
-
 const usersRouter = require('./users');
 const { findUserWithToken,
-  createUserAndGenerateToken
 } = require('../db/users_db');
 apiRouter.use('/users', usersRouter);
 

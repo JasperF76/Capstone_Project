@@ -1,3 +1,7 @@
+// module.exports = {
+//     ...require('./users')
+// }
+
 // const {
 //     createTables,
 //     createUser,

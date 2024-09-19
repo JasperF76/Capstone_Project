@@ -220,6 +220,7 @@ usersRouter.put("/:user_id/comments/:comment_id", async (req, res, next) => {
     }
 });
 
+// This route allows a user to delete their review.
 usersRouter.delete("/:user_id/reviews/:id", async (req, res, next) => {
     try {
         const { id, user_id } = req.params;
@@ -243,6 +244,7 @@ usersRouter.delete("/:user_id/reviews/:id", async (req, res, next) => {
     }
 });
 
+// This route allows a user to delete their comment.
 usersRouter.delete("/:user_id/comments/:id", async (req, res, next) => {
     try {
         const { user_id, id } = req.params;
