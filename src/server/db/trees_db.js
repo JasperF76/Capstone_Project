@@ -5,13 +5,13 @@ const uuid = require("uuid");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT;
 
-const createTree = async ({ treeName, location, description }) => {
+const createTree = async ({ treeName, location, description, image_url }) => {
     const SQL = /* sql */ `
-    INSERT INTO trees(treeName, location, description)
-    VALUES($1, $2, $3)
+    INSERT INTO trees(treeName, location, description, image_url)
+    VALUES($1, $2, $3, $4)
     RETURNING id;
     `;
-    const response = await db.query(SQL, [treeName, location, description]);
+    const response = await db.query(SQL, [treeName, location, description, image_url]);
     return response.rows[0].id;
 };
 

@@ -48,6 +48,7 @@ export default function Trees({ setTree }) {
             {treesToDisplay.map((tree) => {
                 return (
                     <div key={tree.id} className="alltrees">
+                            <img src={tree.image_url} alt="a tree" className="alltrees-pics" style={{ width: '100px', height: '100px' }}/>
                         <h3>
                             Tree Name: {tree.treename}
                         </h3>
