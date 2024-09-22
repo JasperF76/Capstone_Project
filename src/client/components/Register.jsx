@@ -36,10 +36,10 @@ export default function Register({ token, setToken }) {
 
     return (
         <>
-            <h2>Register an Account!</h2>
             {error && <p>{error}</p>}
-            <form onSubmit={handleRegistration}>
+            <form className="register-form" onSubmit={handleRegistration}>
                 <div>
+                    <h2>Register</h2>
                     <label htmlFor="username">Username: </label>
                     <input
                         type="text"
@@ -60,7 +60,7 @@ export default function Register({ token, setToken }) {
                     />
                 </div>
                 <div>
-                    <label htmlFor="password">Email: </label>
+                    <label htmlFor="password">Password: </label>
                     <input
                         type="password"
                         id="password"

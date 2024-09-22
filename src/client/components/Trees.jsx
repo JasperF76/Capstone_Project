@@ -38,7 +38,7 @@ export default function Trees({ setTree }) {
         <>
             <div className="mainpage">
                 <label>
-                    Search for a specific tree: {" "}
+                    Search For A Specific Tree: {" "}
                 </label>
                 <input
                     type="text"

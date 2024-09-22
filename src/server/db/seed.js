@@ -21,7 +21,7 @@ const createTables = async () => {
       id SERIAL PRIMARY KEY,
       treeName VARCHAR(255) UNIQUE NOT NULL,
       location VARCHAR(255) NOT NULL,
-      description VARCHAR(1000) NOT NULL,
+      description VARCHAR(2000) NOT NULL,
       image_url VARCHAR(500)
   );
 
@@ -98,32 +98,38 @@ const insertTrees = async () => {
   try {
     const trees = [
       {
+        treeName: "Thimmamma Marrimanu",
+        location: "Andhra Pradesh, India",
+        description: "The Thimmamma Marrimanu, located in the Anantapur district of Andhra Pradesh, India, is widely recognized as the world’s largest banyan tree, covering an astonishing 4.7 acres. This awe-inspiring tree is not only a natural wonder but also holds significant cultural and spiritual importance. Named after a local woman, Thimmamma, who was believed to have committed sati at this very spot in 1434, the tree is seen as a symbol of devotion and is often visited by pilgrims seeking blessings for childbearing. The tree’s branches, which extend over acres of land, create a vast canopy that can shelter thousands of people underneath. Its intricate network of aerial roots makes it seem as if several trees are intertwined. In 1989, the Thimmamma Marrimanu was recognized by the Guinness World Records for its sprawling coverage, further solidifying its importance as a global natural marvel. Visitors to the site are often struck by the tree’s grandeur, feeling both connected to nature and a deep sense of peace. It remains one of India’s most significant ecological and cultural treasures.",
+        image_url: "https://i.natgeofe.com/n/b161b77c-0e8a-4727-92e4-82926d6240ac/iconic-trees-b5wb2f.jpg?w=1280&h=852"
+      },
+      {
         treeName: 'Brigadier General Charles Young Tree',
-        location: 'Sequoia & Kings Canyon National Parks',
+        location: 'Sequoia & Kings Canyon National Parks, California',
         description: "In 1903, Captain Charles Young, the first African American national park superintendent, led a group of Buffalo Soldiers in overseeing Sequoia National Park. At an end-of-season picnic, locals offered to name a tree after him, but Young declined, suggesting they could do so if they felt the same way in 20 years. Instead, he named a sequoia after educator Booker T. Washington. Nearly a century later, Young’s legacy was celebrated. A West Point graduate and accomplished military leader, Young served as a military attaché to multiple countries, wrote on race and military power, and achieved many firsts. In 2004, the Colonel Charles Young Tree was quietly dedicated, and in 2024, it was renamed to honor his posthumous promotion to Brigadier General. The tree now stands alongside the Booker T. Washington Tree and the Moro Rock / Crescent Meadow Road, commemorating his lasting contributions to history.",
         image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/A01CAFFA-C313-D67C-5C89AEBC99F35217.jpg?width=1600&quality=90&mode=crop"
       },
       {
         treeName: 'The Cypress Tree Tunnel',
-        location: 'Point Reyes National Seashore',
+        location: 'Point Reyes National Seashore, California',
         description: "The Cypress Tree Tunnel at Point Reyes National Seashore is a breathtaking natural landmark where towering Monterey cypress trees form a dramatic archway over a quiet stretch of road. Planted in the 1930s, these trees were originally part of the landscaping for a nearby radio station, which played a key role in transoceanic communication during its time. Over the decades, the trees have grown into an impressive tunnel, attracting visitors for its ethereal beauty and peaceful atmosphere. The sunlight filtering through the branches creates a magical experience for photographers and nature lovers alike. The Cypress Tree Tunnel has since become an iconic spot within Point Reyes, symbolizing the park’s blend of natural and historical significance while offering a serene moment of reflection for all who pass through.",
         image_url: "https://i.etsystatic.com/13751308/r/il/a3d69e/3723673324/il_fullxfull.3723673324_cgcp.jpg"
       },
       {
         treeName: 'General Grant Tree',
-        location: 'Sequoia & Kings Canyon National Parks',
+        location: 'Sequoia & Kings Canyon National Parks, California',
         description: "The General Grant Tree, located in Sequoia & Kings Canyon National Parks, is one of the largest trees on Earth and stands as a symbol of endurance and history. Designated as the 'Nation’s Christmas Tree' by President Calvin Coolidge in 1926, this massive giant sequoia is also a living war memorial, dedicated to soldiers who fought in wars. Estimated to be over 1,600 years old, the tree towers at 267 feet, with a base circumference of nearly 100 feet, making it one of the most visited and revered natural wonders in the park. The General Grant Tree’s immense size and longevity inspire awe and reflect the grandeur of nature, offering visitors a humbling experience as they stand before this ancient, majestic monument.",
         image_url: "https://www.nps.gov/seki/learn/nature/images/General-Grant-Tree-18.JPG"
       },
       {
         treeName: 'Chimney Tree',
-        location: 'Sequoia & Kings Canyon National Parks',
+        location: 'Sequoia & Kings Canyon National Parks, California',
         description: "The Chimney Tree in Sequoia & Kings Canyon National Parks is a unique sequoia that captures visitors’ imaginations with its hollow, fire-scarred trunk. Despite the extensive burn damage, the tree continues to stand tall, earning its nickname from its chimney-like appearance. Fires that swept through the park decades ago hollowed out its core, but the resilient sequoia adapted, making it a fascinating symbol of nature’s ability to endure and regenerate. Visitors can walk inside the tree's hollow trunk, offering a rare and intimate experience with one of the park’s giants. The Chimney Tree serves as a powerful reminder of the sequoia’s remarkable strength and the ever-changing, yet resilient, natural world.",
         image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/7D9E150E-F5A3-E4AF-1BFA93D1EF9A2F0C.jpg?width=1600&quality=90&mode=crop"
       },
       {
         treeName: 'Big Tree Wayside',
-        location: 'Redwood National and State Parks',
+        location: 'Redwood National and State Parks, California',
         description: "The Big Tree Wayside, located in Redwood National and State Parks, is one of the park’s most iconic stops, offering visitors a close-up view of a towering coast redwood that has stood for centuries. Rising over 300 feet and with a circumference of more than 60 feet, this ancient giant is a testament to the resilience and longevity of the redwoods. Easily accessible via a short trail, Big Tree Wayside provides an awe-inspiring experience, allowing visitors to marvel at the grandeur of one of the world's tallest tree species. The area surrounding the tree is peaceful and shaded, offering a perfect spot for reflection and photography. It stands as a natural monument, showcasing the majestic beauty that defines the redwood forests.",
         image_url: "https://images.squarespace-cdn.com/content/v1/5a5986b2cf81e095e172ce87/1640985647677-B0BAP6QCAU52QQ4FNJ3K/flyingdawnmarie-redwoods-big-tree-wayside-01.jpg"
       },
@@ -141,51 +147,51 @@ const insertTrees = async () => {
       },
       {
         treeName: "Historic Tamarind Trees",
-        location: "Buck Island Reef National Monument",
+        location: "Buck Island Reef National Monument, US Virgin Islands",
         description: "The Historic Tamarind Trees at Buck Island Reef National Monument are a unique part of the island’s natural and cultural landscape. These graceful trees, with their broad canopies and distinctive pods, provide welcome shade and a peaceful atmosphere for visitors exploring the island. As some of the oldest living elements on Buck Island, the tamarinds have witnessed generations of history, from the island's early indigenous peoples to its modern status as a protected national monument. Nestled within the vibrant ecosystem of the reef and beaches, these trees offer a striking contrast to the surrounding tropical flora. Their historical significance and natural beauty make them a beloved part of the Buck Island experience, serving as a quiet reminder of the island’s rich heritage and enduring connection to nature.",
         image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/3B85A816-9B19-CE14-D4F370F84F45F3AB.jpg?width=1600&quality=90&mode=crop"
       },
       {
         treeName: "Buttress Tree",
-        location: "Sequoia & Kings Canyon National Parks",
+        location: "Sequoia & Kings Canyon National Parks, California",
         description: "The Buttress Tree in Sequoia & Kings Canyon National Parks is a remarkable example of nature’s architectural prowess. This towering giant sequoia is named for its large, flared roots, which resemble the buttresses of a cathedral, providing stability and strength to support its immense height. Located among other iconic sequoias, the Buttress Tree stands out for its distinctive base, which seems to anchor it firmly into the earth. Visitors are often struck by the tree's resilience, as its roots spread out wide, a testament to the endurance of these ancient giants. Walking around its base offers a unique perspective on the incredible adaptations that have allowed sequoias to thrive for thousands of years. The Buttress Tree serves as a living symbol of nature’s engineering, showcasing the strength and beauty of the sequoia forest.",
         image_url: "https://feelgoodandtravel.com/wp-content/uploads/2017/11/Photo-Aug-16-2-56-50-PM-e1511066996943.jpg"
       },
       {
         treeName: "Big Stump of the Mark Twain Tree",
-        location: "Sequoia & Kings Canyon National Parks",
+        location: "Sequoia & Kings Canyon National Parks, California",
         description: "The Big Stump of the Mark Twain Tree, located in Sequoia & Kings Canyon National Parks, is a poignant reminder of the era when even the largest of trees were not immune to logging. Once part of a massive giant sequoia, the Mark Twain Tree was felled in the late 1800s, with sections of its trunk shipped to museums as a display of the natural world's grandeur. All that remains today is the enormous stump, measuring over 16 feet in diameter. While it serves as a somber reflection of the consequences of early logging practices, the stump also offers visitors an opportunity to witness firsthand the sheer size of these ancient trees. The Big Stump of the Mark Twain Tree stands as both a historical marker and a reminder of the importance of conservation efforts in protecting these majestic sequoias for future generations.",
         image_url: "https://live.staticflickr.com/3271/2807539203_0d823f9224_b.jpg"
       },
       {
         treeName: "Interstadial Stumps - Whidbey Passage",
-        location: "Glacier Bay National Park & Preserve",
+        location: "Glacier Bay National Park & Preserve, Alaska",
         description: "The Interstadial Stumps at Whidbey Passage in Glacier Bay National Park & Preserve are an extraordinary glimpse into the past. These ancient tree stumps, preserved in place by the forces of glaciers long ago, are remnants of a forest that once thrived in the area thousands of years ago. The stumps were exposed as the glaciers retreated, revealing an incredible record of the region’s changing climate and landscape. Visitors to Whidbey Passage can witness these stumps, which stand as silent witnesses to a time before glaciers advanced, transforming the land. The Interstadial Stumps offer a fascinating intersection of geology and ecology, allowing visitors to connect with a prehistoric world while exploring the stunning natural beauty of Glacier Bay. They serve as a powerful reminder of the dynamic forces that continue to shape the region today.",
         image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/D4CF6873-F214-2FD8-55A43A88F9134C18.jpg?width=1600&quality=90&mode=crop"
       },
       {
-        treeName: "Gingko Trees at Ulysses S. Grant NHS",
-        location: "Ulysses S Grant National Historic Site",
-        description: "The Gingko Trees at the Ulysses S. Grant National Historic Site add a touch of elegance and history to the grounds of the former president's estate. Known for their unique fan-shaped leaves that turn a stunning golden hue in the fall, these trees are a living connection to ancient botanical history, as ginkgos are considered “living fossils” dating back over 200 million years. Their presence at the historic site complements the estate’s serene environment, offering visitors a peaceful space to reflect on both natural and national history. Planted long after Ulysses S. Grant’s time, the gingkos now stand tall among the other historic trees on the property, creating a striking contrast of old and new. Their seasonal beauty makes them a favorite feature for visitors, especially in autumn when their leaves create a brilliant yellow canopy over the landscape.",
-        image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/BABC9F81-DDBF-4837-F6D222818860DA84.jpg?width=1600&quality=90&mode=crop"
+        treeName: "Angel Oak",
+        location: "Charleston, South Carolina",
+        description: "The Angel Oak, located on John’s Island near Charleston, South Carolina, is a stunning live oak tree that has captivated visitors for generations. Estimated to be over 400 years old, the Angel Oak stands at an impressive 65 feet tall, with a canopy that provides more than 17,000 square feet of shade. Its sprawling limbs, some of which stretch nearly 90 feet from the trunk, create a natural wonder that feels almost otherworldly. Visitors to the Angel Oak often describe the experience as awe-inspiring, with many noting the tree’s grand size and twisting, gnarled branches that seem to tell the story of centuries of growth. The tree has survived countless storms, including hurricanes, and continues to thrive despite its age. Standing beneath its vast canopy, one can’t help but feel connected to nature's resilience and history. For locals and tourists alike, the Angel Oak is more than just a tree—it’s a living monument to the enduring beauty and strength of the natural world.",
+        image_url: "https://i.natgeofe.com/n/d2a0814d-5a5f-44cc-84f5-f77aaf71b8b0/iconic-trees-kf6059.jpg?w=1280&h=853"
       },
       {
-        treeName: "Dawn Redwood Trees at Ulysses S. Grant NHS",
-        location: "Ulysses S Grant National Historic Site",
-        description: "The Dawn Redwood Trees at the Ulysses S. Grant National Historic Site are a rare and captivating presence on the historic grounds. Thought to be extinct until their rediscovery in China in the 1940s, Dawn Redwoods are often called “living fossils,” much like the Gingko trees nearby. These majestic trees, with their soft, feathery leaves that turn a beautiful bronze in the fall, add a unique touch to the estate. Despite being relatives of the towering California redwoods, Dawn Redwoods are more modest in size but still stand out for their elegance and resilience. Planted after their rediscovery, the trees are a symbol of renewal and endurance, fitting for a site that honors the legacy of one of America’s great leaders. Their story adds another layer of intrigue to the historic grounds, connecting visitors to both natural history and the life of Ulysses S. Grant.",
-        image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/BB63B127-C3E1-5E44-8FC555986FB919CC.jpg?width=1600&quality=90&mode=crop"
+        treeName: "The Olive Tree of Vouves",
+        location: "Crete, Greece",
+        description: "The Olive Tree of Vouves, located on the Greek island of Crete, is one of the oldest olive trees in the world, estimated to be between 2,000 and 3,000 years old. This ancient tree continues to produce olives, a testament to its remarkable longevity and vitality. Standing in the village of Ano Vouves, the tree has become a symbol of resilience and heritage, attracting visitors from around the world who marvel at its gnarled trunk and sprawling branches. The Olive Tree of Vouves is not only significant for its age but also for its connection to the rich history of olive cultivation in the Mediterranean region, where olive trees have been central to the culture and economy for millennia. Today, the tree is preserved and celebrated as a national monument, and its olives are used to make special ceremonial olive wreaths, including those awarded to athletes at the Olympic Games. For many, visiting this ancient tree is a profound reminder of the enduring connection between nature and human civilization.",
+        image_url: "https://i.natgeofe.com/n/a18baae3-434f-4a4e-b0ec-6714081fb85b/iconic-trees-c3rrtm.jpg?w=1280&h=844"
       },
       {
-        treeName: "Flowering Dogwood Trees at Ulysses S. Grant NHS",
-        location: "Ulysses S Grant National Historic Site",
-        description: "The Flowering Dogwood Trees at the Ulysses S. Grant National Historic Site bring a burst of seasonal beauty to the historic landscape. Each spring, these trees are adorned with delicate white and pink blossoms, adding a graceful touch to the grounds where President Grant once walked. The flowering dogwoods are native to the region and symbolize resilience and new beginnings—fitting for the estate of a man who led the nation through one of its most challenging periods. Their vibrant blooms attract visitors year after year, offering a striking contrast to the historic architecture of the estate. As one of the most eye-catching features on the property, the dogwood trees provide a serene and picturesque setting, enhancing the natural and historical significance of Ulysses S. Grant's former home.",
-        image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/BA50B4BF-9C79-5295-CF3434F381E24F38.jpg?width=1600&quality=90&mode=crop"
+        treeName: "Drago Milenario tree",
+        location: "Tenerife, Spain’s Canary Islands",
+        description: "The Drago Milenario, located in Icod de los Vinos on the island of Tenerife in Spain’s Canary Islands, is one of the most famous and ancient trees in the world. This majestic dragon tree (Dracaena draco) is estimated to be over 800 to 1,000 years old, though some locals claim it to be even older. Standing at around 18 meters tall, with a massive trunk and a dense canopy of sword-shaped leaves, the Drago Milenario is a symbol of resilience and longevity. The tree's distinctive shape, with its gnarled, twisting branches, creates an impressive natural sight that has long attracted visitors from around the world. According to local legends, dragon trees were born from the blood of dragons, and the tree's sap—referred to as 'dragon’s blood'—was believed to have healing properties. The Drago Milenario has survived harsh conditions and the passage of centuries, becoming a key cultural and natural landmark for the Canary Islands. Today, it is protected as part of the Parque del Drago, where it continues to inspire awe with its ancient presence and mythical history. For both locals and tourists, the Drago Milenario is a powerful reminder of nature’s enduring beauty and mystery.",
+        image_url: "https://i.natgeofe.com/n/2bde2a73-3176-4793-9e9d-d1002c65ffaa/iconic-trees-h_00000201742060.jpg?w=1280&h=853"
       },
       {
-        treeName: "Sweetgum Trees at Ulysses S. Grant NHS",
-        location: "Ulysses S Grant National Historic Site",
-        description: "The Sweetgum Trees at the Ulysses S. Grant National Historic Site add a distinctive charm to the grounds with their star-shaped leaves and vibrant seasonal colors. In the fall, these trees transform into a dazzling display of reds, oranges, and purples, making them a highlight for visitors exploring the estate. Native to the region, Sweetgum trees are known for their unique seed pods and their striking appearance throughout the year. Their presence at the site complements the historic surroundings, offering a beautiful natural contrast to the historic home of President Grant. The trees' enduring strength and adaptability reflect the legacy of Grant himself, making them a fitting addition to the landscape of this historic property. Their beauty and symbolism make them a beloved feature of the estate, especially during the autumn months when the grounds come alive with color.",
-        image_url: "https://www.nps.gov/common/uploads/cropped_image/primary/B9233A56-E588-4565-618817F0B049686D.jpg?width=1600&quality=90&mode=crop"
+        treeName: "The Jaya Sri Maha Bodhi fig tree",
+        location: "Anuradhapura, Sri Lanka",
+        description: "The Jaya Sri Maha Bodhi fig tree, located in the sacred city of Anuradhapura, Sri Lanka, is one of the most venerated and historically significant trees in the world. Planted in 288 BCE, it is believed to be a sapling from the original Bodhi tree in India under which Siddhartha Gautama attained enlightenment and became the Buddha. This makes the Jaya Sri Maha Bodhi not only a sacred Buddhist symbol but also one of the oldest human-planted trees with a known planting date. The tree stands as a symbol of peace, enlightenment, and resilience, drawing pilgrims and tourists alike to its roots. Protected by stone railings and supported by human care for centuries, the tree is a living monument of spiritual significance. The sight of its leaves swaying in the breeze is said to bring blessings, and it has survived numerous challenges, including storms and invasions, which further enhances its status as a symbol of endurance. For devotees, visiting the Jaya Sri Maha Bodhi is a deeply spiritual experience, one that connects them to the ancient history of Buddhism and the teachings of the Buddha himself.",
+        image_url: "https://i.natgeofe.com/n/a455e1ab-9b1f-42fb-8ae0-5f6053322bfb/iconic-trees-k75155.jpg?w=1280&h=853"
       },
     ];
     const treeIds = [];

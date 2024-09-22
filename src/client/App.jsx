@@ -2,38 +2,75 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Login from './components/Login';
+import Register from './components/Register';
 import Trees from './components/Trees';
 import SingleTree from './components/SingleTree';
+import Nav from './components/Nav';
+import Account from './components/Account';
+import MainPageImage from './assets/TreesOfTheWorldImage.jpg';
 
 function App() {
   const [count, setCount] = useState(0);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [tree, setTree] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ reviews: [], comments: [] });
   const location = useLocation();
 
   return (
     <div className='App'>
+      <Nav token={token} setToken={setToken} />
       {location.pathname === '/' && (
         <>
-          <h1>Iconic Trees of the World</h1>
+          <h1 className='main-header'>Trees of the World!</h1>
           <img
             id='trees-img'
-            src='https://res.cloudinary.com/dgnvposhn/images/w_2560,h_1707,c_scale/f_auto,q_auto/v1711048682/wordpress_assets/DJI_0264_y1ccpm/DJI_0264_y1ccpm.jpg?_i=AA'
-            style={{ width: '100%', height: '400px' }}
+            className='mainpage-img'
+            src={MainPageImage}
+            // style={{ width: '100%', height: '400px' }}
             alt="a forest"
           />
+          
         </>
       )}
       <div>
         <Routes>
           <Route path="/" element={<Trees setTree={setTree} />} />
           <Route path="/trees/:id" element={<SingleTree tree={tree} />} />
-          {/* <Route path="/login" element = {<Login user={user} setUser={setUser} /> }/> */}
+          <Route path="/users/login" element = {<Login user={user} setUser={setUser} token={token} setToken={setToken} /> }/>
+          <Route path="/users/register" element = {<Register setToken={setToken} />} />
+          <Route path="/users/me" element = {<Account token={token} setToken={setToken} user={user} setUser={setUser} />} />
         </Routes>
-      </div>
+      </div><div class="ticker-tape">
+  <div class="ticker">
+    <div class="ticker__item">Suburbs and homes with barren landscapes have been shown to have an increased incidence of violence both inside and outside of the home... </div>
+    <div class="ticker__item">Research indicates that the presence of urban trees in an area are correlated with lower crime rates including vandalism, graffiti, and littering...</div>
+    <div class="ticker__item">The bark of trees that grow in the shade is mostly thin, while the bark of trees that grow in sunny places is thicker...</div>
+    <div class="ticker__item">Trees can communicate and defend themselves against attacking insects. Scientists have found that trees can flood their leaves with chemicals called phenolics when the insects begin their raid. They can also signal danger to other trees so they can start their own defense...</div>
+    <div class="ticker__item">Earth has more than 80,000 edible plant species...</div>
+    <div class="ticker__item">Nutrients and water are absorbed by the root system and carried via the connective tissue to the leaves. Leaves, in turn, transfers sugar down through the connective tissue to the roots...</div>
+    <div class="ticker__item">Even though we call the plants that produce bananas trees, they have no wood trunk. Instead, they have a fibrous, watery main stalk supported by interior water pressure...</div>
+    <div class="ticker__item">Hospital patients who can see fresh green trees from their rooms are reported to heal faster and spend less time in the hospital than those without. Patients with a view of trees spend 8% fewer days in the hospital...</div>
+    <div class="ticker__item">Consumers tend to spend more money on shopping districts with trees. They are most willing to pay more for items purchased in a shopping district with trees. Those same shoppers also say they are willing to stay longer and rate the products and stores as higher quality in a shopping district with the trees...</div>
+    <div class="ticker__item">Trees can mask unsightly views, from concrete walls to parking areas. Not only do they offer us a pleasant green landscape, but also muffle massive amounts of sound from nearby streets and highways all while decreasing glare and dust...</div>
+    <div class="ticker__item">A massive oak tree can drop nearly 10,000 acorns in one year...</div>
+    <div class="ticker__item">Trees improve the water quality by slowing and filtering rainwater and protecting aquifers and watersheds...</div>
+    <div class="ticker__item">Tree’s airborne signals can even transmit information outside the plant kingdom. Some have been shown to attract parasites and predators that kill insects, essentially letting a tormented tree call for backup. For instance, apple trees under attack by caterpillars release chemicals that attract caterpillar-eating birds...</div>
+    <div class="ticker__item">Babies born in areas with greater numbers of trees are less likely to be born underweight...</div>
+    <div class="ticker__item">According to the botanical definition, palms are not trees but massive, woody herbs...</div>
+    <div class="ticker__item">Nearly 16 billion trees are lost every year due to forest management, deforestation, and variations in land use...</div>
+    <div class="ticker__item">The parts of a tree grow at different times throughout the year: typically, most of the foliage growth occurs in the spring, followed by trunk growth in the summer, and root growth in the fall and winter...</div>
+    <div class="ticker__item">The saying ‘knock on wood’ comes from the ancient pagan rituals where it was believed that good spirits resided inside trees...</div>
+    <div class="ticker__item">Never take shelter under a tree during a storm. Electricity always takes the ‘path of least resistance’ meaning the tallest object will be struck first, so steer clear...</div>
+    <div class="ticker__item">The ailanthus altissimo, or tree of heaven, is said to be the only tree that can grow in cement...</div>
+    <div class="ticker__item">Trees have a symbiotic relationship with mycorrhizal fungi that live in their roots. These fungi help trees absorb more water and mineral from the soil, and in turn, trees give fungi sugar molecules, derived in photosynthesis...</div>
+    <div class="ticker__item">The average tree living in the city has a life expectancy of merely 8 years...</div>
     </div>
+  </div>
+</div>
   );
+  
 }
+
+
 
 export default App;

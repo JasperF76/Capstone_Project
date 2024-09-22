@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ token, setToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -13,27 +14,35 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const login = async() => {
+  const navigate = useNavigate();
+
+  const login = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            }, 
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
-        const result = await response.json();
-        setMessage(result.message);
-        if(!response.ok) {
-          throw(result)
-        }
-        setEmail('');
-        setPassword('');
+      const response = await fetch('http://localhost:3000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+      const result = await response.json();
+      setMessage(result.message);
+      setToken(result.token);
+      localStorage.setItem('token', result.token);
+
+      if (response.ok) {
+        navigate("/");
+      } else {
+        throw (result)
+      }
+
+      setEmail('');
+      setPassword('');
     } catch (err) {
-        console.error(`${err.name}: ${err.message}`);
+      console.error(`${err.name}: ${err.message}`);
     }
   }
 
@@ -43,10 +52,10 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className='login-form'>
       <form onSubmit={handleSubmit}>
         <div>
+          <h2>Login</h2>
           <label htmlFor='email'>Email:</label>
           <input
             type='email'

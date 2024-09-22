@@ -1,29 +1,41 @@
-/* .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
+
+
+/* Random Stylings */
+body {
+  background-color: #cce7d0;
 }
 
-.App-header {
-  margin-bottom: 20px;
-  font-size: 24px;
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
 }
-
-#comp-img{
-  width: 250px;
-} */
-
-/* Add more styling for other elements if needed */
 
 h1 {
-  font-size: 72px;
+  font-size: 92px;
   display: flex;
   justify-content: center;
-  color: #45a049;
+  color: #3e8f42;
+  padding-bottom: 20px;
 }
 
+.main-header {
+  padding-top: 100px;
+}
+
+.login-form {
+  padding-top: 80px;
+}
+
+.register-form {
+  padding-top: 80px;
+}
+
+.mainpage-img {
+  width: 100%;
+}
+
+
+/* Main Page Display of Trees */
  .alltrees {
   background-color: #f5f5f5;
   border-radius: 8px;
@@ -40,9 +52,9 @@ h1 {
 }
 
 .alltrees h3 {
-  font-family: 'Arial', sans-serif;
+  /* font-family: 'Arial', sans-serif; */
   color: #333;
-  font-size: 22px;
+  font-size: 32px;
   margin-bottom: 10px;
 }
 
@@ -73,14 +85,174 @@ h1 {
   border-radius: 8px 8px 0 0;
 }
 
+.singletree {
+  padding-bottom: 50px;
+  padding-top: 80px;
+  padding-left: 5px;
+}
+
+.singletree-img {
+  display: flex;
+  justify-content: center;
+}
+
+
+/* Styling for the scrolling ticker */
+:root {
+  --height: 30px;
+  --speed: 500s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.ticker-tape {
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+    helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+  width: 100%;
+  overflow: hidden;
+  height: var(--height);
+  position: fixed;  /* Fixes the ticker at the bottom of the viewport */
+  bottom: 0;        /* Positions it at the bottom */
+  left: 0;
+  background-color: rgb(0, 88, 0);
+  padding-left: 100%;
+}
+
+.ticker-tape .ticker {
+  height: var(--height);
+  line-height: var(--height);
+  white-space: nowrap;
+  padding-right: 100%;
+  
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-name: ticker;
+  -webkit-animation-duration: var(--speed);
+  
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: ticker;
+  animation-duration: var(--speed);
+  
+}
+
+.ticker-tape .ticker__item {
+  display: inline-block;
+  padding: 0 5rem;
+  /* font-size: 8rem; */
+  /* font-weight:  */
+    /* letter-spacing: 1.5rem; */
+  color: white;
+}
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+/* Nav Bar Styling*/
+.navbar {
+  background-color: #004d40; /* Dark green background */
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+}
+
+.navbar-container {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #00796b;
+  color: white;
+  border-radius: 5px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+.nav-button:hover {
+  background-color: #00796b;
+  color: white;
+}
+
+
+/* Search Bar Styling */
 .mainpage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.singletree img {
-  display: flex;
-  justify-content: center;
+.mainpage label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.mainpage input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #004d40;
+  border-radius: 8px;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.mainpage input:focus {
+  box-shadow: 0 0 10px rgba(0, 77, 64, 0.5);
+}
+
+.mainpage input::placeholder {
+  font-style: italic;
+  color: #aaa;
 }
