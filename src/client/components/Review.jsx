@@ -18,7 +18,7 @@ export default function Reviews({ treeId, userId }) {
             }
         }
         console.log(treeId);
-        
+
         fetchReviews();
     }, [treeId]);
 
@@ -46,6 +46,10 @@ export default function Reviews({ treeId, userId }) {
                 }),
             });
 
+            console.log("tree id", treeId);
+            console.log("user id", userId);
+
+
             const newReview = await response.json();
             setReviews([...reviews, newReview]);
             setReviewText("");
@@ -62,7 +66,6 @@ export default function Reviews({ treeId, userId }) {
     return (
         <div>
             <h2>Reviews</h2>
-
             {
                 reviews.length > 0 ? (
                     reviews.map((review) => (
@@ -90,7 +93,7 @@ export default function Reviews({ treeId, userId }) {
                     <input
                         type="number"
                         id="rating"
-                        vaule={rating}
+                        value={rating}
                         onChange={(e) => setRating(e.target.value)}
                         min="1"
                         max="5"

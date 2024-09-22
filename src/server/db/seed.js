@@ -98,12 +98,6 @@ const insertTrees = async () => {
   try {
     const trees = [
       {
-        treeName: "Thimmamma Marrimanu",
-        location: "Andhra Pradesh, India",
-        description: "The Thimmamma Marrimanu, located in the Anantapur district of Andhra Pradesh, India, is widely recognized as the world’s largest banyan tree, covering an astonishing 4.7 acres. This awe-inspiring tree is not only a natural wonder but also holds significant cultural and spiritual importance. Named after a local woman, Thimmamma, who was believed to have committed sati at this very spot in 1434, the tree is seen as a symbol of devotion and is often visited by pilgrims seeking blessings for childbearing. The tree’s branches, which extend over acres of land, create a vast canopy that can shelter thousands of people underneath. Its intricate network of aerial roots makes it seem as if several trees are intertwined. In 1989, the Thimmamma Marrimanu was recognized by the Guinness World Records for its sprawling coverage, further solidifying its importance as a global natural marvel. Visitors to the site are often struck by the tree’s grandeur, feeling both connected to nature and a deep sense of peace. It remains one of India’s most significant ecological and cultural treasures.",
-        image_url: "https://i.natgeofe.com/n/b161b77c-0e8a-4727-92e4-82926d6240ac/iconic-trees-b5wb2f.jpg?w=1280&h=852"
-      },
-      {
         treeName: 'Brigadier General Charles Young Tree',
         location: 'Sequoia & Kings Canyon National Parks, California',
         description: "In 1903, Captain Charles Young, the first African American national park superintendent, led a group of Buffalo Soldiers in overseeing Sequoia National Park. At an end-of-season picnic, locals offered to name a tree after him, but Young declined, suggesting they could do so if they felt the same way in 20 years. Instead, he named a sequoia after educator Booker T. Washington. Nearly a century later, Young’s legacy was celebrated. A West Point graduate and accomplished military leader, Young served as a military attaché to multiple countries, wrote on race and military power, and achieved many firsts. In 2004, the Colonel Charles Young Tree was quietly dedicated, and in 2024, it was renamed to honor his posthumous promotion to Brigadier General. The tree now stands alongside the Booker T. Washington Tree and the Moro Rock / Crescent Meadow Road, commemorating his lasting contributions to history.",
@@ -192,6 +186,12 @@ const insertTrees = async () => {
         location: "Anuradhapura, Sri Lanka",
         description: "The Jaya Sri Maha Bodhi fig tree, located in the sacred city of Anuradhapura, Sri Lanka, is one of the most venerated and historically significant trees in the world. Planted in 288 BCE, it is believed to be a sapling from the original Bodhi tree in India under which Siddhartha Gautama attained enlightenment and became the Buddha. This makes the Jaya Sri Maha Bodhi not only a sacred Buddhist symbol but also one of the oldest human-planted trees with a known planting date. The tree stands as a symbol of peace, enlightenment, and resilience, drawing pilgrims and tourists alike to its roots. Protected by stone railings and supported by human care for centuries, the tree is a living monument of spiritual significance. The sight of its leaves swaying in the breeze is said to bring blessings, and it has survived numerous challenges, including storms and invasions, which further enhances its status as a symbol of endurance. For devotees, visiting the Jaya Sri Maha Bodhi is a deeply spiritual experience, one that connects them to the ancient history of Buddhism and the teachings of the Buddha himself.",
         image_url: "https://i.natgeofe.com/n/a455e1ab-9b1f-42fb-8ae0-5f6053322bfb/iconic-trees-k75155.jpg?w=1280&h=853"
+      },
+      {
+        treeName: "Thimmamma Marrimanu",
+        location: "Andhra Pradesh, India",
+        description: "The Thimmamma Marrimanu, located in the Anantapur district of Andhra Pradesh, India, is widely recognized as the world’s largest banyan tree, covering an astonishing 4.7 acres. This awe-inspiring tree is not only a natural wonder but also holds significant cultural and spiritual importance. Named after a local woman, Thimmamma, who was believed to have committed sati at this very spot in 1434, the tree is seen as a symbol of devotion and is often visited by pilgrims seeking blessings for childbearing. The tree’s branches, which extend over acres of land, create a vast canopy that can shelter thousands of people underneath. Its intricate network of aerial roots makes it seem as if several trees are intertwined. In 1989, the Thimmamma Marrimanu was recognized by the Guinness World Records for its sprawling coverage, further solidifying its importance as a global natural marvel. Visitors to the site are often struck by the tree’s grandeur, feeling both connected to nature and a deep sense of peace. It remains one of India’s most significant ecological and cultural treasures.",
+        image_url: "https://i.natgeofe.com/n/b161b77c-0e8a-4727-92e4-82926d6240ac/iconic-trees-b5wb2f.jpg?w=1280&h=852"
       },
     ];
     const treeIds = [];
@@ -306,6 +306,12 @@ const insertReviews = async (userIds, treeIds) => {
         user_id: userIds[4],
         tree_id: treeIds[14]
       },
+      {
+        text: "What an amazing experience. The sheer size of this trees canopy is so surreal.. it almost feels like a movie prop.",
+        rating: 5,
+        user_id: userIds[4],
+        tree_id: treeIds[15]
+      },
     ];
     const createdReviews = [];
 
@@ -404,6 +410,11 @@ const insertComments = async (reviewIds, userIds) => {
       {
         text: "I had one of these in front of my house growing up. We used to throw those little balls at each other, lol",
         review_id: reviewIds[14].id,
+        user_id: userIds[0]
+      },
+      {
+        text: "Ya, I could definitely see this being some kind of end-level bosses' hideout",
+        review_id: reviewIds[15].id,
         user_id: userIds[0]
       },
     ];

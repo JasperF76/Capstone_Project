@@ -133,7 +133,7 @@ usersRouter.get("/me", async (req, res, next) => {
         console.log(user);
 
         const userReviews = await getReviewsByUserId(user.id);
-        console.log(userReviews);
+        console.log("reviews with tree data:", userReviews);
 
         const userComments = await getCommentsByUserId(user.id);
 

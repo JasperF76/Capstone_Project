@@ -143,9 +143,10 @@ const getReviewsByUserId = async (userId) => {
     try {
         console.log("Querying reviews for user_id:", userId);
         const reviews = await db.query(`
-        SELECT * 
+        SELECT reviews.*, trees.treeName, trees.location, trees.description
         FROM reviews
-        WHERE user_id=$1;`, [userId]);
+        JOIN trees ON reviews.tree_id = trees.id
+        WHERE reviews.user_id=$1;`, [userId]);
 
         if (!reviews) {
             return null;

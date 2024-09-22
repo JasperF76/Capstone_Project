@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 
-export default function Account({ token, setToken, user, setUser }) {
+export default function Account({ token, setToken, user, setUser, }) {
     const [successMessage, setSuccessMessage] = useState(null);
     const [error, setError] = useState(null);
     const [deletedReview, setDeletedReview] = useState(null);
@@ -91,9 +91,9 @@ export default function Account({ token, setToken, user, setUser }) {
         <>
             {token ?
                 (
-                    <div>
+                    <div className="user-account">
                         <div>
-                            <h3>Welcome, {user.username}!</h3>
+                            <h2>Welcome, {user.username}!</h2>
                         </div>
                         <div>
                             {user.reviews?.map((review) => (
@@ -102,8 +102,11 @@ export default function Account({ token, setToken, user, setUser }) {
                                         Rating: {review.rating}
                                     </h3>
                                     <h3>
-                                        Review: {review.text}
+                                        Review for {review.treename}:
                                     </h3>
+                                    <p>
+                                        {review.text}
+                                    </p>
                                     <button onClick={() => deleteReview(review.id)}>Delete Review</button>
                                 </div>
                             ))}
