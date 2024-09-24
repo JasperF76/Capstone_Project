@@ -20,7 +20,6 @@ export default function Trees({ setTree }) {
             );
 
             const result = await response.json();
-            console.log(result.trees);
             setTreesList(result.trees);
 
         } catch (error) {

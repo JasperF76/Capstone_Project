@@ -44,7 +44,7 @@ const editReview = async ({ review_id, new_text, new_rating }) => {
 };
 
 const deleteReview = async ({ user_id, id }) => {
-    
+
     const SQL = /* sql */ `
     DELETE FROM reviews
     WHERE user_id=$1 AND id=$2
@@ -56,7 +56,8 @@ const createComment = async ({ text, review_id, user_id }) => {
     const SQL = /* sql */ `
     INSERT INTO comments(id, text, review_id, user_id)
     VALUES($1, $2, $3, $4)
-    RETURNING *
+    RETURNING id, text, review_id, user_id,
+    (SELECT username FROM users WHERE users.id = comments.user_id) AS username
     `;
     const response = await db.query(SQL, [uuid.v4(), text, review_id, user_id]);
     return response.rows[0];
@@ -94,8 +95,9 @@ const getAllTrees = async () => {
 
 const getAllReviews = async (tree_id) => {
     const SQL = /* sql */ `
-    SELECT *
+    SELECT reviews.*, users.username
     FROM reviews
+    JOIN users ON reviews.user_id = users.id
     WHERE tree_id = $1
     `;
     const response = await db.query(SQL, [tree_id]);
@@ -104,8 +106,9 @@ const getAllReviews = async (tree_id) => {
 
 const getAllComments = async (review_id) => {
     const SQL = /* sql */ `
-    SELECT *
+    SELECT comments.*, users.username
     FROM comments
+    JOIN users ON comments.user_id = users.id
     WHERE review_id = $1
     `;
     const response = await db.query(SQL, [review_id]);

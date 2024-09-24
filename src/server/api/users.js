@@ -130,10 +130,8 @@ usersRouter.get("/me", async (req, res, next) => {
         }
 
         const user = req.user;
-        console.log(user);
 
         const userReviews = await getReviewsByUserId(user.id);
-        console.log("reviews with tree data:", userReviews);
 
         const userComments = await getCommentsByUserId(user.id);
 
@@ -162,8 +160,6 @@ usersRouter.get("/me", async (req, res, next) => {
 
 usersRouter.put("/:user_id/reviews/:review_id", async (req, res, next) => {
     const { review_id, user_id } = req.params;
-    console.log("review id", review_id);
-    console.log("user id", user_id);
 
     try {
         if (!req.user || req.user.id !== user_id) {
@@ -174,8 +170,8 @@ usersRouter.put("/:user_id/reviews/:review_id", async (req, res, next) => {
 
         const editedReview = await editReview({
             review_id: review_id,
-            new_text: req.body.new_text,
-            new_rating: req.body.new_rating,
+            new_text: req.body.text,
+            new_rating: req.body.rating,
         });
 
         if (!editedReview) {
@@ -193,8 +189,6 @@ usersRouter.put("/:user_id/reviews/:review_id", async (req, res, next) => {
 // This route allows a user to edit their comment.
 usersRouter.put("/:user_id/comments/:comment_id", async (req, res, next) => {
     const { comment_id, user_id } = req.params;
-    console.log("comment id", comment_id);
-    console.log("user id", user_id);
 
     try {
         if (!req.user || req.user.id !== user_id) {
@@ -205,7 +199,7 @@ usersRouter.put("/:user_id/comments/:comment_id", async (req, res, next) => {
 
         const editedComment = await editComment({
             comment_id: comment_id,
-            new_text: req.body.new_text,
+            new_text: req.body.text,
         });
 
         if (!editedComment) {
@@ -224,8 +218,6 @@ usersRouter.put("/:user_id/comments/:comment_id", async (req, res, next) => {
 usersRouter.delete("/:user_id/reviews/:id", async (req, res, next) => {
     try {
         const { id, user_id } = req.params;
-        console.log("review id", id);
-        console.log("user id", user_id);
         
         
         if (!req.user || req.user.id !== user_id) {
@@ -248,8 +240,6 @@ usersRouter.delete("/:user_id/reviews/:id", async (req, res, next) => {
 usersRouter.delete("/:user_id/comments/:id", async (req, res, next) => {
     try {
         const { user_id, id } = req.params;
-        console.log("comment id", id);
-        console.log("user id", user_id);
         
         
         if (!req.user || req.user.id !== user_id) {

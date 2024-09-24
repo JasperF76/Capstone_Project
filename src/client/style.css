@@ -149,7 +149,8 @@ ul {
 li {
   margin-bottom: 10px;
   font-family: 'Cormorant Garamond', serif;
-  color: #3A2F29; /* Dark brown */
+  color: #3A2F29;
+  /* Dark brown */
   font-size: 18px;
 }
 
@@ -161,7 +162,8 @@ form {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-form textarea, form input[type="number"] {
+form textarea,
+form input[type="number"] {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -171,7 +173,8 @@ form textarea, form input[type="number"] {
 }
 
 form button {
-  background-color: #4CAF50; /* Forest green */
+  background-color: #4CAF50;
+  /* Forest green */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -195,7 +198,8 @@ form button:hover {
 }
 
 .review p {
-  color: #3A2F29; /* Dark brown */
+  color: #3A2F29;
+  /* Dark brown */
 }
 
 /* .review h2 {
@@ -209,7 +213,8 @@ form button:hover {
 } */
 
 .review h3 {
-  color: #4C7A57; /* Dark green */
+  color: #4C7A57;
+  /* Dark green */
 }
 
 .comments {
@@ -233,7 +238,7 @@ form button:hover {
 /* Styling for the scrolling ticker */
 :root {
   --height: 30px;
-  --speed: 500s;
+  --speed: 1300s;
 }
 
 * {
@@ -399,7 +404,8 @@ form button:hover {
 
 /* Styling for the Account Page. */
 .user-account {
-  background-color: #f0efe9; /* Light cream background */
+  background-color: #f0efe9;
+  /* Light cream background */
   border-radius: 15px;
   padding: 30px;
   padding-top: 100px;
@@ -410,7 +416,8 @@ form button:hover {
 .user-account h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2.5rem;
-  color: #2c5d3f; /* Dark green for the text */
+  color: #2c5d3f;
+  /* Dark green for the text */
   text-align: center;
   margin-bottom: 30px;
 }
@@ -418,7 +425,8 @@ form button:hover {
 .user-account h3 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.8rem;
-  color: #4a773c; /* Slightly lighter green */
+  color: #4a773c;
+  /* Slightly lighter green */
   margin-bottom: 10px;
 }
 
@@ -429,7 +437,8 @@ form button:hover {
 }
 
 .user-account button {
-  background-color: #77a856; /* Soft green for button */
+  background-color: #77a856;
+  /* Soft green for button */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -438,14 +447,17 @@ form button:hover {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 10px;
+  margin-right: 5px
 }
 
 .user-account button:hover {
-  background-color: #5c8a46; /* Darker green on hover */
+  background-color: #5c8a46;
+  /* Darker green on hover */
 }
 
 .user-account div {
-  background-color: #fff; /* White background for the review/comment boxes */
+  background-color: #fff;
+  /* White background for the review/comment boxes */
   border-radius: 10px;
   padding: 20px;
   max-width: 800px;
@@ -453,10 +465,128 @@ form button:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.user-account .review, .user-account .comment {
+.user-account .review,
+.user-account .comment {
   margin-bottom: 20px;
 }
 
-.user-account h3, p {
+.user-account h3,
+p {
   margin: 10px 0;
+}
+
+/* Styling for the modal.
+/* Modal background overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Soft, semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure it's above all other elements */
+}
+
+/* Modal container */
+.modal-content {
+  background-color: #f2f2e9;
+  /* Light beige or natural parchment color */
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  /* Soft shadow for depth */
+  position: relative;
+  z-index: 1001;
+  /* Layer on top of overlay */
+  font-family: 'Cormorant Garamond', serif;
+  /* Match your nature theme font */
+  color: #4d4d4d;
+  /* Dark, earthy text color */
+  animation: modalFadeIn 0.3s ease-in-out;
+  /* Smooth fade-in animation */
+}
+
+/* Close button */
+.modal-content button.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+
+/* Modal header */
+.modal-content h2 {
+  color: #334d33;
+  /* Earthy green for heading */
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Textarea and input styling */
+.modal-content textarea,
+.modal-content input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid #c4c4c4;
+  background-color: #f9f9f6;
+  /* Soft off-white */
+  color: #333;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  resize: none;
+  /* Prevent resizing */
+}
+
+/* Save and cancel buttons */
+.modal-content button {
+  background-color: #8FB88F;
+  /* Soft, natural green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.modal-content button:hover {
+  background-color: #729F72;
+  /* Darker green on hover */
+}
+
+.modal-content button.cancel-btn {
+  background-color: #B88F8F;
+  /* Muted reddish-brown */
+}
+
+.modal-content button.cancel-btn:hover {
+  background-color: #9F7272;
+}
+
+/* Animation for modal */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

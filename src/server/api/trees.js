@@ -109,7 +109,6 @@ treesRouter.get('/:id/reviews', async (req, res, next) => {
 
 // This route allows a user to post a review.
 treesRouter.post('/:id/reviews', async (req, res, next) => {
-    console.log("request", req);
     
     const { id } = req.params;
 
@@ -119,7 +118,6 @@ treesRouter.post('/:id/reviews', async (req, res, next) => {
             error.status = 401;
             throw error;
         }
-        // console.log(req.body.text, "req.body.text");
 
         const createdReview = await createReview({
             text: req.body.text,
@@ -165,10 +163,10 @@ treesRouter.post('/:tree_id/reviews/:review_id/comments', async (req, res, next)
     const { review_id } = req.params;
 
     try {
-        if (!req.user.id) {
-            const error = Error('Register to create an account.');
-            error.status = 401;
-            throw error;
+        if (!req.user || !req.user.id) {
+            return res.status(401).send({
+                message: "You must be logged in to post a comment."
+            });
         }
 
         const createdComment = await createComment({
