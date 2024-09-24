@@ -106,9 +106,10 @@ const getAllComments = async (review_id) => {
     const SQL = /* sql */ `
     SELECT *
     FROM comments
-    WHERE user_id = $1
+    WHERE review_id = $1
     `;
     const response = await db.query(SQL, [review_id]);
+    return response.rows;
 };
 
 const getTreeById = async (id) => {

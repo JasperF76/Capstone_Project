@@ -18,7 +18,7 @@ apiRouter.use(async (req, res, next) => {
     const token = auth.split(' ')[1];
 
     try {
-      // const { id } = jwt.verify(token, process.env.JWT_SECRET);
+      const { id } = jwt.verify(token, process.env.JWT_SECRET);
       const user = await findUserWithToken(token);
       console.log(user, "user");
 

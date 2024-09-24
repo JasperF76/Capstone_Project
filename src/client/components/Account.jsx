@@ -7,12 +7,12 @@ export default function Account({ token, setToken, user, setUser, }) {
     const [deletedReview, setDeletedReview] = useState(null);
     const [deletedComment, setDeletedComment] = useState(null);
     const [refresh, setRefresh] = useState(false);
+    const [newReview, setNewReview] = useState(null);
+    const [newComment, setNewComment] = useState(null);
     const navigate = useNavigate();
-    console.log(user);
 
     async function getUser() {
         try {
-            console.log(token);
 
             const response = await fetch(
                 "http://localhost:3000/api/users/me",
@@ -26,7 +26,6 @@ export default function Account({ token, setToken, user, setUser, }) {
             );
 
             const result = await response.json();
-            console.log(result);
             setSuccessMessage(result.message);
             setUser(result.user);
 
@@ -34,6 +33,31 @@ export default function Account({ token, setToken, user, setUser, }) {
             setError(error.message)
         }
     };
+
+    async function editReview() {
+        try {
+            const response = await fetch(
+                `http://localhost:3000/api/users/${user.id}/reviews/${id}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        review_id,
+                        new_text,
+                        new_rating,
+                    }),
+                }
+            );
+
+            const result = await response.json();
+            setNewReview(result);
+        } catch (error) {
+
+        }
+    }
 
     async function deleteReview(id) {
         try {
@@ -57,8 +81,31 @@ export default function Account({ token, setToken, user, setUser, }) {
         }
     };
 
+    async function editComment() {
+        try {
+            const response = await fetch(
+                `http://localhost:3000/api/users/${user.id}/comments/${id}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        comment_id,
+                        new_text,
+                    }),
+                }
+            );
+
+            const result = await response.json();
+            setNewComment(result);
+        } catch (error) {
+
+        }
+    }
+
     async function deleteComment(id) {
-        console.log(user);
 
         try {
             const response = await fetch(
@@ -96,8 +143,10 @@ export default function Account({ token, setToken, user, setUser, }) {
                             <h2>Welcome, {user.username}!</h2>
                         </div>
                         <div>
+                            <h2>Your Reviews:</h2>
                             {user.reviews?.map((review) => (
                                 <div key={review.id}>
+
                                     <h3>
                                         Rating: {review.rating}
                                     </h3>
@@ -107,16 +156,20 @@ export default function Account({ token, setToken, user, setUser, }) {
                                     <p>
                                         {review.text}
                                     </p>
+                                    <button onClick={() => editReview(review.id)}>Edit Review</button>
                                     <button onClick={() => deleteReview(review.id)}>Delete Review</button>
                                 </div>
                             ))}
                         </div>
                         <div>
+                            <h2>Your Comments: </h2>
                             {user.comments?.map((comment) => (
                                 <div key={comment.id}>
+
                                     <h3>
                                         {comment.text}
                                     </h3>
+                                    <button onClick={() => editComment(comment.id)}>Edit Comment</button>
                                     <button onClick={() => deleteComment(comment.id)}>Delete Comment</button>
                                 </div>
                             ))}

@@ -50,10 +50,11 @@ export default function Trees({ setTree }) {
                     <div key={tree.id} className="alltrees">
                             <img src={tree.image_url} alt="a tree" className="alltrees-pics" style={{ width: '100px', height: '100px' }}/>
                         <h3>
-                            Tree Name: {tree.treename}
+                            {tree.treename}
                         </h3>
+                        <p className="of"><i>of</i></p>
                         <h3>
-                            Location: {tree.location}
+                            {tree.location}
                         </h3>
                         <button onClick={() => {
                             setTree(tree);

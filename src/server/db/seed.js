@@ -193,6 +193,24 @@ const insertTrees = async () => {
         description: "The Thimmamma Marrimanu, located in the Anantapur district of Andhra Pradesh, India, is widely recognized as the world’s largest banyan tree, covering an astonishing 4.7 acres. This awe-inspiring tree is not only a natural wonder but also holds significant cultural and spiritual importance. Named after a local woman, Thimmamma, who was believed to have committed sati at this very spot in 1434, the tree is seen as a symbol of devotion and is often visited by pilgrims seeking blessings for childbearing. The tree’s branches, which extend over acres of land, create a vast canopy that can shelter thousands of people underneath. Its intricate network of aerial roots makes it seem as if several trees are intertwined. In 1989, the Thimmamma Marrimanu was recognized by the Guinness World Records for its sprawling coverage, further solidifying its importance as a global natural marvel. Visitors to the site are often struck by the tree’s grandeur, feeling both connected to nature and a deep sense of peace. It remains one of India’s most significant ecological and cultural treasures.",
         image_url: "https://i.natgeofe.com/n/b161b77c-0e8a-4727-92e4-82926d6240ac/iconic-trees-b5wb2f.jpg?w=1280&h=852"
       },
+      {
+        treeName: "The Great Wisteria Tree",
+        location: "Ashikaga Flower Park, Japan",
+        description: "The Great Wisteria tree at Ashikaga Flower Park in Japan is a breathtaking natural wonder that draws visitors from around the world. This centuries-old tree spreads across nearly 2,000 square meters, creating a mesmerizing canopy of cascading lavender, white, and pink blooms during peak bloom from late April to early May. The delicate flowers hang like chandeliers, forming tunnels and archways that feel almost otherworldly. The tree has been carefully preserved over the years, making it one of the largest and most iconic wisteria displays globally. In the evening, the park illuminates the wisteria with soft lighting, transforming the landscape into a magical scene that is just as stunning as it is during the day. A visit to the Great Wisteria tree offers an enchanting and peaceful experience, leaving a lasting impression of its serene and natural beauty.",
+        image_url: "https://i.natgeofe.com/n/a014e71c-a239-47b0-a870-346743634011/iconic-trees-t19y0k.jpg?w=1280&h=853"
+      },
+      {
+        treeName: "Maior Cajueiro Do Mundo",
+        location: "Pirangi do Norte, Brazil",
+        description: "The Maior Cajueiro do Mundo, or the Largest Cashew Tree in the World, located in Natal, Brazil, is an awe-inspiring natural wonder. This massive tree spans nearly 8,500 square meters, making it the largest of its kind globally. Visitors are captivated by its sprawling branches, which twist and spread out over an entire city block, resembling a small forest. The tree's size is the result of a genetic mutation that causes its branches to grow horizontally and re-root, creating an intricate network of trunks. Walking beneath its expansive canopy, one can appreciate the sheer scale and marvel at how this single tree produces tons of cashews each year. The site is well-maintained, with pathways allowing visitors to explore different sections of the tree while learning about its unique history and environmental significance. A visit to the Maior Cajueiro do Mundo offers a truly unique experience, combining nature, history, and local culture in one impressive attraction.",
+        image_url: "https://i.natgeofe.com/n/9466e6a2-9548-46f7-acaa-6fa03af5277a/iconic-trees-j3p116.jpg?w=1280&h=853"
+      },
+      {
+        treeName: "Avenue of the Baobabs",
+        location: "Menabe, Madagascar",
+        description: "The Avenue of the Baobabs in Madagascar is a breathtaking and iconic natural wonder that draws visitors from around the world. Lined with towering baobab trees, some of which are over 800 years old and stand up to 30 meters tall, this dusty dirt road between Morondava and Belon’i Tsiribihina feels like a passage through time. The trees, with their enormous trunks and sparse branches, create a surreal and almost mythical landscape, especially during sunrise or sunset when the sky is painted in brilliant colors and the baobabs cast long, striking shadows. Once part of a dense forest, the baobabs are now the remnants of a much larger ecosystem, standing as majestic symbols of resilience and beauty. For many, walking along this avenue evokes a deep connection with nature and a sense of wonder at the longevity and endurance of these ancient trees. The Avenue of the Baobabs offers a unique, unforgettable experience and a glimpse into Madagascar’s rich ecological and cultural heritage.",
+        image_url: "https://www.worldatlas.com/upload/72/6d/f8/shutterstock-1125367931.jpg"
+      },
     ];
     const treeIds = [];
 

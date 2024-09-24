@@ -7,12 +7,13 @@ import Trees from './components/Trees';
 import SingleTree from './components/SingleTree';
 import Nav from './components/Nav';
 import Account from './components/Account';
-import MainPageImage from './assets/TreesOfTheWorldImage.jpg';
+import MainPageImage from './assets/AnimatedForest.gif';
 
 function App() {
   const [count, setCount] = useState(0);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [tree, setTree] = useState(null);
+  const [treeId, setTreeId] = useState(null);
   const [user, setUser] = useState({ reviews: [], comments: [] });
   const location = useLocation();
 
@@ -21,12 +22,12 @@ function App() {
       <Nav token={token} setToken={setToken} />
       {location.pathname === '/' && (
         <>
-          <h1 className='main-header'>Trees of the World!</h1>
+          <h1 className='main-header'>Trees of the World</h1>
           <img
             id='trees-img'
             className='mainpage-img'
             src={MainPageImage}
-            // style={{ width: '100%', height: '400px' }}
+            style={{ width: '100%', height: '400px' }}
             alt="a forest"
           />
 
@@ -35,11 +36,14 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Trees setTree={setTree} />} />
-          <Route path="/trees/:id" element={<SingleTree tree={tree} />} />
+          <Route path="/trees/:id" element={<SingleTree tree={tree} token={token} user={user} />} />
           <Route path="/users/login" element={<Login user={user} setUser={setUser} token={token} setToken={setToken} />} />
           <Route path="/users/register" element={<Register setToken={setToken} />} />
           <Route path="/users/me" element={<Account token={token} setToken={setToken} user={user} setUser={setUser} />} />
         </Routes>
+
+        {/* Ticker Facts */}
+
       </div><div className="ticker-tape">
         <div className="ticker">
           <div className="ticker__item">Suburbs and homes with barren landscapes have been shown to have an increased incidence of violence both inside and outside of the home... </div>
@@ -50,7 +54,7 @@ function App() {
           <div className="ticker__item">Nutrients and water are absorbed by the root system and carried via the connective tissue to the leaves. Leaves, in turn, transfers sugar down through the connective tissue to the roots...</div>
           <div className="ticker__item">Even though we call the plants that produce bananas trees, they have no wood trunk. Instead, they have a fibrous, watery main stalk supported by interior water pressure...</div>
           <div className="ticker__item">Hospital patients who can see fresh green trees from their rooms are reported to heal faster and spend less time in the hospital than those without. Patients with a view of trees spend 8% fewer days in the hospital...</div>
-          <div className="ticker__item">Consumers tend to spend more money on shopping districts with trees. They are most willing to pay more for items purchased in a shopping district with trees. Those same shoppers also say they are willing to stay longer and rate the products and stores as higher quality in a shopping district with the trees...</div>
+          <div className="ticker__item">Consumers tend to spend more money in shopping districts with trees. They are willing to pay more for items purchased in a shopping district with trees. Those same shoppers are also willing to stay longer and rate the products and stores as higher quality in shopping districts with trees...</div>
           <div className="ticker__item">Trees can mask unsightly views, from concrete walls to parking areas. Not only do they offer us a pleasant green landscape, but also muffle massive amounts of sound from nearby streets and highways all while decreasing glare and dust...</div>
           <div className="ticker__item">A massive oak tree can drop nearly 10,000 acorns in one year...</div>
           <div className="ticker__item">Trees improve the water quality by slowing and filtering rainwater and protecting aquifers and watersheds...</div>

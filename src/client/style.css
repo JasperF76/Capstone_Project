@@ -4,9 +4,16 @@
 /* Random Stylings */
 body {
   background-color: #cce7d0;
+  border: 30px solid transparent;
+  padding: 20px;
+  margin: 0;
+  box-sizing: border-box;
+  border-image: url('./assets/vinesborder.jpg') 30 round;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: 'Cormorant Garamond', serif;
 }
 
@@ -17,6 +24,12 @@ h1 {
   color: #3e8f42;
   padding-bottom: 20px;
 }
+
+/* p,
+li,
+a {
+  font-family: 'Open Sans', sans-serif;
+} */
 
 .main-header {
   padding-top: 100px;
@@ -38,9 +51,25 @@ h1 {
   width: 100%;
 }
 
+.of {
+  margin-left: 20px;
+  color: #666;
+}
+
+/* .singletree {
+  padding-bottom: 50px;
+  padding-top: 80px;
+  padding-left: 5px;
+}
+
+.singletree-img {
+  display: flex;
+  justify-content: center;
+} */
+
 
 /* Main Page Display of Trees */
- .alltrees {
+.alltrees {
   background-color: #f5f5f5;
   border-radius: 8px;
   padding: 20px;
@@ -89,15 +118,115 @@ h1 {
   border-radius: 8px 8px 0 0;
 }
 
+/* Styling for each trees single page. */
+
 .singletree {
-  padding-bottom: 50px;
-  padding-top: 80px;
-  padding-left: 5px;
+  background-color: #faf8ef;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.singletree-img {
-  display: flex;
-  justify-content: center;
+.singletree h1 {
+  color: #3e8f42;
+  font-family: 'Cormorant Garamond', serif;
+  text-align: center;
+}
+
+.singletree-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  color: #3A2F29; /* Dark brown */
+  font-size: 18px;
+}
+
+form {
+  background-color: #f5f5f0;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form textarea, form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+form button {
+  background-color: #4CAF50; /* Forest green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+.review {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review p {
+  color: #3A2F29; /* Dark brown */
+}
+
+/* .review h2 {
+  font-size: 2.5rem;
+  color: #2E8B57;
+  text-align: center;
+  padding: 20px 0;
+  font-family: 'Cormorant Garamond', serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+} */
+
+.review h3 {
+  color: #4C7A57; /* Dark green */
+}
+
+.comments {
+  margin-left: 20px;
+}
+
+.comment {
+  background-color: #e6f2e3;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment p {
+  font-size: 14px;
+  color: #3A2F29;
 }
 
 
@@ -119,10 +248,12 @@ h1 {
   width: 100%;
   overflow: hidden;
   height: var(--height);
-  position: fixed;  /* Fixes the ticker at the bottom of the viewport */
-  bottom: 0;        /* Positions it at the bottom */
+  position: fixed;
+  /* Fixes the ticker at the bottom of the viewport */
+  bottom: 0;
+  /* Positions it at the bottom */
   left: 0;
-  background-color: rgb(0, 88, 0);
+  background-color: #004d40;
   padding-left: 100%;
 }
 
@@ -131,17 +262,17 @@ h1 {
   line-height: var(--height);
   white-space: nowrap;
   padding-right: 100%;
-  
+
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
   -webkit-animation-name: ticker;
   -webkit-animation-duration: var(--speed);
-  
+
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-name: ticker;
   animation-duration: var(--speed);
-  
+
 }
 
 .ticker-tape .ticker__item {
@@ -149,7 +280,7 @@ h1 {
   padding: 0 5rem;
   /* font-size: 8rem; */
   /* font-weight:  */
-    /* letter-spacing: 1.5rem; */
+  /* letter-spacing: 1.5rem; */
   color: white;
 }
 
@@ -159,6 +290,7 @@ h1 {
     transform: translateX(0);
     visibility: visible;
   }
+
   100% {
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
@@ -171,6 +303,7 @@ h1 {
     transform: translateX(0);
     visibility: visible;
   }
+
   100% {
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
@@ -179,18 +312,20 @@ h1 {
 
 /* Nav Bar Styling*/
 .navbar {
-  background-color: #004d40; /* Dark green background */
+  background-color: #004d40;
+  /* Dark green background */
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   position: fixed;
-  width: 100%;
+  width: 20%;
 }
 
 .navbar-container {
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -259,4 +394,69 @@ h1 {
 .mainpage input::placeholder {
   font-style: italic;
   color: #aaa;
+}
+
+
+/* Styling for the Account Page. */
+.user-account {
+  background-color: #f0efe9; /* Light cream background */
+  border-radius: 15px;
+  padding: 30px;
+  padding-top: 100px;
+  margin: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.user-account h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  color: #2c5d3f; /* Dark green for the text */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.user-account h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: #4a773c; /* Slightly lighter green */
+  margin-bottom: 10px;
+}
+
+.user-account p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #595959;
+}
+
+.user-account button {
+  background-color: #77a856; /* Soft green for button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.user-account button:hover {
+  background-color: #5c8a46; /* Darker green on hover */
+}
+
+.user-account div {
+  background-color: #fff; /* White background for the review/comment boxes */
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-account .review, .user-account .comment {
+  margin-bottom: 20px;
+}
+
+.user-account h3, p {
+  margin: 10px 0;
 }

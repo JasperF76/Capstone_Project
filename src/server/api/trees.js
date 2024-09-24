@@ -14,7 +14,8 @@ const {
     getAllReviews,
     getTreeById,
     createReview,
-    createComment
+    createComment,
+    getAllComments
 } = require('../db/trees_db');
 const { findUserWithToken } = require('../db/users_db');
 
@@ -40,33 +41,6 @@ treesRouter.get('/', async (req, res, next) => {
 
         res.status(200).send({
             trees
-        });
-    } catch (error) {
-        console.error('Error fetching trees:', error);
-
-        next({
-            name: error.name,
-            message: error.message,
-            status: 500
-        });
-    }
-});
-
-// This route returns all the reviews for a single tree.
-treesRouter.get('/:id/reviews', async (req, res, next) => {
-    const { id } = req.params;
-
-    try {
-        const reviews = await getAllReviews(id);
-
-        if (reviews.length === 0) {
-            return res.status(204).send({
-                message: 'No reviews found'
-            });
-        }
-
-        res.status(200).send({
-            reviews
         });
     } catch (error) {
         console.error('Error fetching trees:', error);
@@ -106,13 +80,38 @@ treesRouter.get('/:id', async (req, res, next) => {
     }
 });
 
+// This route returns all the reviews for a single tree.
+treesRouter.get('/:id/reviews', async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+        const reviews = await getAllReviews(id);
+
+        if (! reviews || reviews.length === 0) {
+            return res.status(204).send({
+                message: 'No reviews found'
+            });
+        }
+
+        res.status(200).send({
+            reviews
+        });
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+
+        next({
+            name: error.name,
+            message: error.message,
+            status: 500
+        });
+    }
+});
+
 // This route allows a user to post a review.
 treesRouter.post('/:id/reviews', async (req, res, next) => {
+    console.log("request", req);
+    
     const { id } = req.params;
-    console.log(req.body, "req.body");
-    console.log(id, "id");
-    console.log(req.user, "req.user");
-
 
     try {
         if (!req.user.id) {
@@ -131,6 +130,33 @@ treesRouter.post('/:id/reviews', async (req, res, next) => {
         res.status(201).send(createdReview);
     } catch (ex) {
         next(ex);
+    }
+});
+
+// This route returns all the comments for a single review.
+treesRouter.get('/:tree_id/reviews/:review_id/comments', async (req, res, next) => {
+    const { review_id } = req.params;
+
+    try {
+        const comments = await getAllComments(review_id);
+
+        if (!comments || comments.length === 0) {
+            return res.status(204).send({
+                message: 'No comments found'
+            });
+        }
+
+        res.status(200).send({
+            comments
+        });
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+
+        next({
+            name: error.name,
+            message: error.message,
+            status: 500
+        });
     }
 });
 
