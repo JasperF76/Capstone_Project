@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ token, setToken }) => {
+const Login = ({ token, setToken, setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -30,11 +30,12 @@ const Login = ({ token, setToken }) => {
       });
       const result = await response.json();
       setMessage(result.message);
-      setToken(result.token);
-      localStorage.setItem('token', result.token);
 
-      if (response.ok) {
-        navigate("/");
+      if (result.token) {
+      setToken(result.token);
+      setUser(result.user);
+      localStorage.setItem('token', result.token);
+      navigate("/users/me");
       } else {
         throw (result)
       }

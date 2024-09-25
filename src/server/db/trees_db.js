@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT;
 
 const createTree = async ({ treeName, location, description, image_url }) => {
+    try {
     const SQL = /* sql */ `
     INSERT INTO trees(treeName, location, description, image_url)
     VALUES($1, $2, $3, $4)
@@ -13,6 +14,10 @@ const createTree = async ({ treeName, location, description, image_url }) => {
     `;
     const response = await db.query(SQL, [treeName, location, description, image_url]);
     return response.rows[0].id;
+} catch (error) {
+    console.error('Error creating tree:', error);
+    throw new Error('Error creating tree');
+}
 };
 
 const createReview = async ({ text, rating, user_id, tree_id }) => {

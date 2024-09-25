@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Trees from './components/Trees';
 import SingleTree from './components/SingleTree';
 import Nav from './components/Nav';
 import Account from './components/Account';
+import CreateTree from './components/CreateTree';
 import MainPageImage from './assets/AnimatedForest.gif';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <div className='App'>
-      <Nav token={token} setToken={setToken} />
+      <Nav token={token} setToken={setToken} user={user} />
       {location.pathname === '/' && (
         <>
           <h1 className='main-header'>Trees of the World</h1>
@@ -40,6 +41,7 @@ function App() {
           <Route path="/users/login" element={<Login user={user} setUser={setUser} token={token} setToken={setToken} />} />
           <Route path="/users/register" element={<Register setToken={setToken} />} />
           <Route path="/users/me" element={<Account token={token} setToken={setToken} user={user} setUser={setUser} />} />
+          <Route path="/trees/new_tree" element={user && user.isadmin ? (<CreateTree token={token} />) : (<Navigate to="/" />)} />
         </Routes>
 
         {/* Ticker Facts */}

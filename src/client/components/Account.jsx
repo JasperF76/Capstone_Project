@@ -20,7 +20,7 @@ export default function Account({ token, setToken, user, setUser }) {
     // This fetches all of a users data.
     async function getUser() {
         try {
-
+            console.log("Sending token:", token);
             const response = await fetch(
                 "http://localhost:3000/api/users/me",
                 {
@@ -33,6 +33,7 @@ export default function Account({ token, setToken, user, setUser }) {
             );
 
             const result = await response.json();
+            console.log("Fetched user data:", result);
             setSuccessMessage(result.message);
             setUser(result.user);
 
@@ -165,10 +166,17 @@ export default function Account({ token, setToken, user, setUser }) {
     };
 
     useEffect(() => {
-        console.log("refresh triggered, fetching user data");
-        getUser();
+        if (token) {
+            console.log("refresh triggered, fetching user data");
+            getUser();
+        } else {
+            setError("You must be logged in to view this page");
+        }
     }, [refresh]);
 
+    if (!user) {
+        return <p>Loading user data...</p>;
+    }
 
 
     return (

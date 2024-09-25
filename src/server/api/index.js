@@ -20,19 +20,19 @@ apiRouter.use(async (req, res, next) => {
     try {
       const { id } = jwt.verify(token, process.env.JWT_SECRET);
       const user = await findUserWithToken(token);
-      console.log(user, "user");
-
       if (user) {
         req.user = user;
         console.log("Authenticated user:", req.user);
-        
-      }
+        } else {
+          console.log("user not found with token");
+        }
+          
 
       next();
       // TODO - Call 'jwt.verify()' to see if the token is valid. If it is, use it to get the user's 'id'. Look up the user with their 'id' and set 'req.user'
 
     } catch (error) {
-      next(error);
+      console.error("Token verification failed:", error.message);
     }
   }
   else {

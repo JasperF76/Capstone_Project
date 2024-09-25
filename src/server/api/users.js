@@ -5,6 +5,7 @@ const {
     createUser,
     getUser,
     getUserByEmail,
+    getUserById,
     getReviewsByUserId,
     getCommentsByUserId,
     getAllUsers
@@ -41,6 +42,7 @@ usersRouter.get('/', async (req, res, next) => {
 // This route allows a user to log in with their email and password.
 usersRouter.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
+    console.log('Email:', email, 'Password:', password);
     if (!email || !password) {
         next({
             name: 'MissingCredentialsError',
@@ -129,7 +131,9 @@ usersRouter.get("/me", async (req, res, next) => {
             });
         }
 
-        const user = req.user;
+        console.log("User ID:", req.user.id);
+        const user = await getUserById(req.user.id);
+        console.log("User data fetched:", user);
 
         const userReviews = await getReviewsByUserId(user.id);
 
@@ -138,8 +142,7 @@ usersRouter.get("/me", async (req, res, next) => {
         const responseData = {
             message: 'Data successfully retrieved.',
             user: {
-                id: user.id,
-                username: user.username,
+                ...user,
                 reviews: userReviews,
                 comments: userComments
             }

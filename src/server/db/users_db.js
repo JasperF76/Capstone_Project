@@ -68,8 +68,10 @@ const authenticate = async ({ username, password }) => {
         error.status = 401;
         throw error;
     }
-    const token = await jwt.sign({ id: response.rows[0].id }, JWT_SECRET);
-    return { token };
+
+    const user = response.rows[0];
+    const token = await jwt.sign({ id: user.id, isadmin: user.isadmin }, JWT_SECRET);
+    return { token, isadmin: user.isadmin };
 };
 
 const findUserWithToken = async (token) => {
@@ -85,7 +87,7 @@ const findUserWithToken = async (token) => {
         throw error;
     }
     const SQL = /* sql */ `
-      SELECT id, username 
+      SELECT id, username, email, "isadmin"
       FROM users 
       WHERE id=$1;
     `;
@@ -124,10 +126,31 @@ const getUser = async ({ email, password }) => {
     }
 };
 
+const getUserById = async (userId) => {
+    try {
+        const { rows: [user] } = await db.query(`
+            SELECT id, username, email, password, "isadmin"
+            FROM users
+            WHERE id = $1;
+        `, [userId]);
+
+        if (!user) {
+            console.log("No user found with ID:", id);
+            
+            throw new Error('User not found');
+        }
+
+        return user;
+    } catch (err) {
+        console.error("Error fetching user by ID:", err);
+        throw err;
+    }
+};
+
 const getUserByEmail = async (email) => {
     try {
         const { rows: [user] } = await db.query(`
-        SELECT id, username, email, "isAdmin" 
+        SELECT id, username, email, password, "isadmin" 
         FROM users
         WHERE email=$1;`, [email]);
 
@@ -191,6 +214,7 @@ module.exports = {
     getUser,
     getAllUsers,
     getUserByEmail,
+    getUserById,
     getReviewsByUserId,
     getCommentsByUserId,
     createUserAndGenerateToken,

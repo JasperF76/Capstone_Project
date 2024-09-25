@@ -15,7 +15,8 @@ const {
     getTreeById,
     createReview,
     createComment,
-    getAllComments
+    getAllComments,
+    createTree
 } = require('../db/trees_db');
 const { findUserWithToken } = require('../db/users_db');
 
@@ -27,6 +28,17 @@ const { findUserWithToken } = require('../db/users_db');
 //       next(ex);
 //     }
 //   };
+
+const requireAdmin = (req, res, next) => {
+    if (req.user && req.user.isadmin) {
+        next(); 
+    } else {
+        res.status(403).send({
+            name: 'AuthorizationError',
+            message: 'You do not have permission to perform this action',
+        });
+    }
+};
 
 // This route returns all trees.
 treesRouter.get('/', async (req, res, next) => {
@@ -178,6 +190,27 @@ treesRouter.post('/:tree_id/reviews/:review_id/comments', async (req, res, next)
         res.status(201).send(createdComment);
     } catch (error) {
         next(error);
+    }
+});
+
+// This route allows an admin user to create a new tree entry.
+treesRouter.post('/new_tree', requireAdmin, async (req, res, next) => {
+    try {
+        const {treeName, location, description, image_url} = req.body;
+
+        const createdTree = await createTree({
+        treeName,
+        location,
+        description,
+        image_url
+    });
+    res.status(201).send(createdTree);
+    } catch (error) {
+        next({
+            name: 'TreeCreationError',
+            message: 'There was an error creating the tree',
+            error
+        });
     }
 });
 

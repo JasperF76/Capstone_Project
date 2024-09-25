@@ -56,7 +56,7 @@ export default function SingleTree({ tree, treeId, token, user }) {
                             {tree.description}
                         </p>
                     </li>
-                    {tree && <Reviews treeId={tree.id} userId={user.id} />}
+                    {tree && <Reviews treeId={tree.id} userId={user} />}
                 </ul>
                 </>
                 ) : (
