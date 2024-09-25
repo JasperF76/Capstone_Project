@@ -238,7 +238,7 @@ form button:hover {
 /* Styling for the scrolling ticker */
 :root {
   --height: 30px;
-  --speed: 1300s;
+  --speed: 1100s;
 }
 
 * {

@@ -21,11 +21,11 @@ const JWT_SECRET = process.env.JWT_SECRET
 //     }
 // }
 
-const createUser = async ({ username, email, password }) => {
+const createUser = async ({ username, email, password, isadmin = false }) => {
     try {
         const SQL = /* sql */ `
-    INSERT INTO users(id, username, email, password)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO users(id, username, email, password, "isadmin")
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *
     `;
         const response = await db.query(SQL, [
@@ -33,6 +33,7 @@ const createUser = async ({ username, email, password }) => {
             username,
             email,
             await bcrypt.hash(password, 5),
+            isadmin,
         ]);
         return response.rows[0];
     } catch (err) {
@@ -41,9 +42,9 @@ const createUser = async ({ username, email, password }) => {
     }
 };
 
-const createUserAndGenerateToken = async ({ username, password }) => {
+const createUserAndGenerateToken = async ({ username, password, isadmin = false }) => {
     try {
-        const user = await createUser({ username, password });
+        const user = await createUser({ username, password, isadmin });
         const token = await jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
         return { token };
     } catch (err) {
@@ -54,7 +55,7 @@ const createUserAndGenerateToken = async ({ username, password }) => {
 
 const authenticate = async ({ username, password }) => {
     const SQL = /* sql */ `
-      SELECT id, username, password 
+      SELECT id, username, password, "isadmin" 
       FROM users 
       WHERE username=$1;
     `;
@@ -126,7 +127,7 @@ const getUser = async ({ email, password }) => {
 const getUserByEmail = async (email) => {
     try {
         const { rows: [user] } = await db.query(`
-        SELECT * 
+        SELECT id, username, email, "isAdmin" 
         FROM users
         WHERE email=$1;`, [email]);
 

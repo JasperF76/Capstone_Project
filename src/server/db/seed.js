@@ -14,7 +14,8 @@ const createTables = async () => {
       id UUID PRIMARY KEY,
       username VARCHAR(255) UNIQUE NOT NULL,
       email VARCHAR(255) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL
+      password VARCHAR(255) NOT NULL,
+      isAdmin BOOLEAN DEFAULT FALSE
   );
 
   CREATE TABLE trees (
@@ -51,26 +52,31 @@ const insertUsers = async () => {
         username: 'EmiJo',
         email: 'emily@example.com',
         password: 'securepass',
+        isAdmin: 'false'
       },
       {
         username: 'LiuWei',
         email: 'liu@example.com',
         password: 'strongpass',
+        isAdmin: 'false'
       },
       {
         username: 'IsaGarcía',
         email: 'bella@example.com',
         password: 'pass1234',
+        isAdmin: 'false'
       },
       {
         username: 'Mohamm Ahm',
         email: 'mohammed@example.com',
         password: 'mysecretpassword',
+        isAdmin: 'false'
       },
       {
         username: 'JoSmit',
         email: 'john@example.com',
         password: 'password123',
+        isAdmin: 'false'
       },
     ];
 
@@ -80,7 +86,8 @@ const insertUsers = async () => {
       const createdUser = await createUser({
         username: user.username,
         email: user.email,
-        password: user.password
+        password: user.password,
+        isAdmin: user.isAdmin
       });
       userIds.push(createdUser.id);
     }
@@ -210,6 +217,48 @@ const insertTrees = async () => {
         location: "Menabe, Madagascar",
         description: "The Avenue of the Baobabs in Madagascar is a breathtaking and iconic natural wonder that draws visitors from around the world. Lined with towering baobab trees, some of which are over 800 years old and stand up to 30 meters tall, this dusty dirt road between Morondava and Belon’i Tsiribihina feels like a passage through time. The trees, with their enormous trunks and sparse branches, create a surreal and almost mythical landscape, especially during sunrise or sunset when the sky is painted in brilliant colors and the baobabs cast long, striking shadows. Once part of a dense forest, the baobabs are now the remnants of a much larger ecosystem, standing as majestic symbols of resilience and beauty. For many, walking along this avenue evokes a deep connection with nature and a sense of wonder at the longevity and endurance of these ancient trees. The Avenue of the Baobabs offers a unique, unforgettable experience and a glimpse into Madagascar’s rich ecological and cultural heritage.",
         image_url: "https://www.worldatlas.com/upload/72/6d/f8/shutterstock-1125367931.jpg"
+      },
+      {
+        treeName: "Tree of Ténéré",
+        location: "Sahara Desert",
+        description: "The Tree of Ténéré, once located in the vast expanse of the Sahara Desert, stood as a powerful symbol of resilience and survival in one of the most hostile environments on Earth. For decades, this solitary acacia was considered the most isolated tree in the world, with no other vegetation for hundreds of miles. Its presence was a beacon for travelers and nomads, a living monument to the endurance of life in the harshest of conditions. The tree's roots, remarkably, reached deep into the desert to tap into an underground water source, allowing it to thrive where no other tree could. Unfortunately, the Tree of Ténéré met a tragic end in 1973 when a truck driver accidentally knocked it over. Despite its physical absence, the legacy of this extraordinary tree lives on, reminding us of nature's ability to adapt and persevere against all odds. Its memory is now preserved by a metal sculpture that marks the spot where it once stood.",
+        image_url: "https://d3f9k0n15ckvhe.cloudfront.net/wp-content/uploads/2016/05/Tree-of-T%C3%A9n%C3%A9r%C3%A9-Michel-Mazeau-via-Wikimedia-Commons.jpg"
+      },
+      {
+        treeName: "General Sherman",
+        location: "Sequoia National Park, California",
+        description: "The General Sherman Tree, located in California's Sequoia National Park, is a living testament to nature's grandeur and resilience. As the largest known tree by volume, this giant sequoia commands awe with its immense size, towering over 275 feet tall and boasting a trunk circumference of over 100 feet at its base. Estimated to be around 2,200 years old, General Sherman stands as a symbol of longevity and survival, having weathered millennia of environmental changes. Visitors to Sequoia National Park are often left speechless by its sheer scale, which challenges the human perspective of time and nature. Despite its massive size, the General Sherman Tree continues to grow each year, adding more wood than any other tree on Earth. Walking among the sequoias, with General Sherman as the centerpiece, offers a humbling experience, reminding us of our small place in the natural world and the incredible lifeforms that have endured long before us.",
+        image_url: "https://ca-times.brightspotcdn.com/dims4/default/a8410b0/2147483647/strip/true/crop/960x1280+0+0/resize/1200x1600!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F9f%2Ff2%2Fdcbe0515468eb94c87fe53b701ab%2Fla-me-sequoia-fire.JPEG"
+      },
+      {
+        treeName: "Major Oak",
+        location: "Sherwood Forest, Nottinghamshire, England",
+        description: "The Major Oak, located in the heart of Sherwood Forest in Nottinghamshire, England, is a legendary tree that stands as an enduring symbol of both history and myth. Believed to be around 800 to 1,000 years old, this ancient English oak is famous for its connection to the folklore of Robin Hood, with tales claiming the outlaw used it as a hideout. The tree's immense size is awe-inspiring, with a trunk circumference of over 33 feet and branches supported by a series of wooden poles to preserve its structure. Despite its age, the Major Oak remains a robust and living testament to England’s natural heritage. Visitors to Sherwood Forest are often struck by the tree’s grandeur and the sense of timelessness it imparts. The Major Oak's sprawling canopy and gnarled trunk provide not only a connection to nature but also a deep sense of history, blending myth and reality in a way that captivates all who come to see it.",
+        image_url: "https://d3f9k0n15ckvhe.cloudfront.net/wp-content/uploads/2016/05/Major-Oak-John-W.-Schulze-via-Flickr.jpg"
+      },
+      {
+        treeName: "Arbol del Tule",
+        location: "Santa Maria del Tule, Oaxaca, Mexico",
+        description: "The Árbol del Tule, located in the town of Santa María del Tule, Oaxaca, Mexico, is one of the most remarkable trees in the world. This Montezuma cypress, known for its massive trunk, holds the distinction of being the tree with the widest girth in the world, measuring an astonishing 46 feet in diameter. Believed to be over 1,500 years old, the Árbol del Tule is not only an impressive natural wonder but also a living piece of Mexico’s cultural heritage. The tree’s sprawling canopy and knotted, intricate bark have fascinated visitors for centuries, and it’s often said that various shapes and faces can be seen in the textures of its bark. Its sheer size and ancient presence evoke a sense of awe and reverence, drawing thousands of visitors each year to marvel at its grandeur. For those visiting Oaxaca, the Árbol del Tule is a must-see destination, offering a rare glimpse at one of nature's true giants and a profound connection to the past.",
+        image_url: "https://live.staticflickr.com/2744/4255210421_cc41ce11d2_b.jpg"
+      },
+      {
+        treeName: "Boab Prison Tree",
+        location: "near Derby, Western Australia",
+        description: "The Boab Prison Tree, located near Derby in Western Australia, is an iconic and culturally significant landmark steeped in history and legend. This ancient boab, estimated to be over 1,500 years old, is unique for its hollow trunk, which has a circumference of around 46 feet. Historically, the tree is said to have been used as a holding cell for Indigenous prisoners during the late 19th century, as they were transported to Derby for sentencing. Although the full extent of its use as a 'prison' is debated, the tree stands as a haunting symbol of the colonial era’s impact on Aboriginal communities. The Boab Prison Tree’s sprawling branches and bulbous trunk make it an impressive natural monument, and it is now protected, with visitors able to view it from a respectful distance. Its cultural significance to both Indigenous Australians and local history makes it an essential stop for those exploring the Kimberley region, providing not only a connection to Australia's unique natural environment but also a somber reminder of the country’s complex past.",
+        image_url: "https://res.cloudinary.com/simpleview/image/upload/v1686261309/clients/australiasnwtourism/Taryn_Yeates_Photography_432_d11a1792-36fb-40d4-829d-35b435588678.jpg"
+      },
+      {
+        treeName: "Tree of Life",
+        location: "Arabian Desert, Bahrain",
+        description: "The Tree of Life, located in Bahrain, is an extraordinary natural wonder that stands isolated in the Arabian Desert, defying the harsh, arid conditions surrounding it. Estimated to be over 400 years old, this mesquite tree has baffled scientists and locals alike, as it thrives with no visible water source in one of the driest areas on Earth. Its deep roots are believed to tap into underground aquifers, though its survival remains a mystery. For centuries, the Tree of Life has been a symbol of resilience and endurance, attracting visitors from all over the world who are drawn to its unique ability to flourish in such an unforgiving environment. The tree has also gained cultural and mythological significance, with some local legends associating it with the Garden of Eden. Standing majestically against the barren desert backdrop, the Tree of Life is a testament to nature’s tenacity, offering a moment of awe and reflection to those who visit this remote yet remarkable site.",
+        image_url: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Tree_of_Life%2C_Bahrain_-_%E0%B4%9C%E0%B5%80%E0%B4%B5%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86_%E0%B4%AE%E0%B4%B0%E0%B4%82%2C_%E0%B4%AC%E0%B4%B9%E0%B5%8D%E0%B4%B1%E0%B5%88%E0%B5%BB_01.JPG"
+      },
+      {
+        treeName: "Cedars of God",
+        location: "Qadisha Valley, Lebanon",
+        description: "The Cedars of God, nestled in Lebanon’s Qadisha Valley, are a breathtaking testament to the enduring majesty of nature and the rich historical legacy of the region. These ancient cedar trees, some of which are thousands of years old, have long been revered for their beauty, strength, and spiritual significance. Once covering vast stretches of Lebanon, the cedars were prized by ancient civilizations, including the Phoenicians, Egyptians, and Romans, for their high-quality wood, which was used in everything from shipbuilding to constructing temples and palaces. Today, the Cedars of God stand as a UNESCO World Heritage site, preserving one of the last remnants of these once-great forests. Walking among these towering giants, visitors are transported through time, feeling a deep connection to the region's cultural heritage and the ancient peoples who revered these trees. Despite centuries of exploitation, the remaining trees are a symbol of resilience and conservation, offering an unforgettable experience to nature lovers, history enthusiasts, and pilgrims alike.",
+        image_url: "https://live.staticflickr.com/1581/26554503035_7b357207ab_k.jpg"
       },
     ];
     const treeIds = [];
