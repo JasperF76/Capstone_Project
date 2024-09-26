@@ -27,6 +27,14 @@ export default function CreateTree({ token }) {
             });
 
             const result = await response.json();
+            // const contentType = response.headers.get('Content-Type');
+            // let result;
+
+            // if (contentType && contentType.includes('application/json')) {
+            // result = await response.json();
+            // } else {
+            //     throw new Error('Response is not JSON');
+            // }
 
             if (response.ok) {
                 setMessage(`Tree '${treeName}' created successfully!`);

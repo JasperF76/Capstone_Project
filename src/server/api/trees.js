@@ -16,7 +16,8 @@ const {
     createReview,
     createComment,
     getAllComments,
-    createTree
+    createTree,
+    deleteTree
 } = require('../db/trees_db');
 const { findUserWithToken } = require('../db/users_db');
 
@@ -198,19 +199,31 @@ treesRouter.post('/new_tree', requireAdmin, async (req, res, next) => {
     try {
         const {treeName, location, description, image_url} = req.body;
 
+        if (!treeName || !location || !description || !image_url) {
+            return res.status(400).send({ message: 'All fields are required.'});
+        }
+
         const createdTree = await createTree({
         treeName,
         location,
         description,
         image_url
     });
-    res.status(201).send(createdTree);
+    res.status(201).send({ message: 'Tree created successfully.', treeId: createdTree});
     } catch (error) {
-        next({
-            name: 'TreeCreationError',
-            message: 'There was an error creating the tree',
-            error
-        });
+        console.error('Error creating tree:', error);
+        res.status(500).send({message: 'Error creating tree', error: error.message});
+    }
+});
+
+treesRouter.delete("/delete/:id", requireAdmin, async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const deletedTree = await deleteTree({ id });
+        res.sendStatus(204);
+
+    } catch (error) {
+        next(error);
     }
 });
 

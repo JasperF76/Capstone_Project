@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import Login from './components/Login';
@@ -16,11 +16,29 @@ function App() {
   const [tree, setTree] = useState(null);
   const [treeId, setTreeId] = useState(null);
   const [user, setUser] = useState({ reviews: [], comments: [] });
+  const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    if (token) {
+      fetch("/api/users/me", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        setUser(data.user);
+        setIsAdmin(data.user.isAdmin);
+      });
+    } else {
+      setIsAdmin(false);
+    }
+  }, [token]);
 
   return (
     <div className='App'>
-      <Nav token={token} setToken={setToken} user={user} />
+      <Nav token={token} setToken={setToken} user={user} setIsAdmin={setIsAdmin} />
       {location.pathname === '/' && (
         <>
           <h1 className='main-header'>Trees of the World</h1>
@@ -36,12 +54,12 @@ function App() {
       )}
       <div>
         <Routes>
-          <Route path="/" element={<Trees setTree={setTree} />} />
+          <Route path="/" element={<Trees setTree={setTree} token={token} isAdmin={user?.isadmin} />} />
           <Route path="/trees/:id" element={<SingleTree tree={tree} token={token} user={user} />} />
           <Route path="/users/login" element={<Login user={user} setUser={setUser} token={token} setToken={setToken} />} />
           <Route path="/users/register" element={<Register setToken={setToken} />} />
           <Route path="/users/me" element={<Account token={token} setToken={setToken} user={user} setUser={setUser} />} />
-          <Route path="/trees/new_tree" element={user && user.isadmin ? (<CreateTree token={token} />) : (<Navigate to="/" />)} />
+          <Route path="/trees/new_tree" element={isAdmin ? (<CreateTree token={token} />) : (<Navigate to="/" />)} />
         </Routes>
 
         {/* Ticker Facts */}

@@ -106,6 +106,7 @@ a {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 5px;
 }
 
 .alltrees button:hover {
@@ -344,7 +345,7 @@ form button:hover {
 }
 
 .nav-username {
-  color: white;
+  color: rgb(155, 231, 155);
   text-decoration: none;
   font-size: 18px;
   font-family: 'Roboto', sans-serif;

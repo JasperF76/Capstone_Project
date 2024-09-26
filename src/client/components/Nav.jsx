@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Nav({ token, setToken, user }) {
+export default function Nav({ token, setToken, user, setUser,setIsAdmin }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         setToken(null);
+        setIsAdmin(false);
         navigate('/');
-        console.log("user in nav", user);
-
+        window.location.reload();
     };
 
     return (

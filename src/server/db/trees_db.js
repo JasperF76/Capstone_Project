@@ -20,6 +20,15 @@ const createTree = async ({ treeName, location, description, image_url }) => {
 }
 };
 
+const deleteTree = async ({ id }) => {
+
+    const SQL = /* sql */ `
+    DELETE FROM trees
+    WHERE id=$1
+    `;
+    await db.query(SQL, [id]);
+};
+
 const createReview = async ({ text, rating, user_id, tree_id }) => {
     // console.log('Review Data:', { text, rating, user_id, tree_id });
 
@@ -138,6 +147,7 @@ const getTreeById = async (id) => {
 
 module.exports = {
     createTree,
+    deleteTree,
     createReview,
     editReview,
     deleteReview,

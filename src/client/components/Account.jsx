@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import Modal from "./Modal";
+import CreateTree from "./CreateTree";
 
 export default function Account({ token, setToken, user, setUser }) {
     const [successMessage, setSuccessMessage] = useState(null);
@@ -186,7 +187,17 @@ export default function Account({ token, setToken, user, setUser }) {
                     <div className="user-account">
                         <div>
                             <h2>Welcome, {user.username}!</h2>
+                            <h3>Registered Email Address:</h3>
+                            <h3>{user.email}</h3>
                         </div>
+
+                        {user.isadmin && (
+                            <div className="admin-section">
+                                <h2>Admin Panel</h2>
+                                <CreateTree token={token} />
+                            </div>
+                        )}
+
                         <div>
                             <h2>Your Reviews:</h2>
                             {user.reviews?.map((review) => (
