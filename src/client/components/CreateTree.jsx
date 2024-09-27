@@ -12,7 +12,7 @@ export default function CreateTree({ token }) {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3000/api/trees/new_tree', {
+            const response = await fetch('/api/trees/new_tree', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

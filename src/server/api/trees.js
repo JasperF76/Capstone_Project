@@ -17,6 +17,7 @@ const {
     createComment,
     getAllComments,
     createTree,
+    editTree,
     deleteTree
 } = require('../db/trees_db');
 const { findUserWithToken } = require('../db/users_db');
@@ -216,6 +217,32 @@ treesRouter.post('/new_tree', requireAdmin, async (req, res, next) => {
     }
 });
 
+// This route allows an admin user to edit a tree entry.
+treesRouter.put("/edit_tree/:id", requireAdmin, async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+        const editedTree = await editTree({
+            tree_id: id,
+            treeName: req.body.treeName,
+            location: req.body.location,
+            description: req.body.description,
+            image_url: req.body.image_url,
+        });
+
+        if (!editedTree) {
+            return res.status(404).send({
+                message: 'Tree not found or could not be updated.',
+            });
+        }
+        res.status(201).send(editedTree);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+// This route allows an admin user to delete a tree entry.
 treesRouter.delete("/delete/:id", requireAdmin, async (req, res, next) => {
     try {
         const { id } = req.params;

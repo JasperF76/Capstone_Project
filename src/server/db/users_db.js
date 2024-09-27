@@ -21,7 +21,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 //     }
 // }
 
-const createUser = async ({ username, email, password, isadmin = false }) => {
+const createUser = async ({ username, email, password, isAdmin = false }) => {
     try {
         const SQL = /* sql */ `
     INSERT INTO users(id, username, email, password, "isadmin")
@@ -33,7 +33,7 @@ const createUser = async ({ username, email, password, isadmin = false }) => {
             username,
             email,
             await bcrypt.hash(password, 5),
-            isadmin,
+            isAdmin,
         ]);
         return response.rows[0];
     } catch (err) {
@@ -42,9 +42,9 @@ const createUser = async ({ username, email, password, isadmin = false }) => {
     }
 };
 
-const createUserAndGenerateToken = async ({ username, password, isadmin = false }) => {
+const createUserAndGenerateToken = async ({ username, password, isAdmin = false }) => {
     try {
-        const user = await createUser({ username, password, isadmin });
+        const user = await createUser({ username, password, isAdmin });
         const token = await jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
         return { token };
     } catch (err) {
@@ -70,8 +70,8 @@ const authenticate = async ({ username, password }) => {
     }
 
     const user = response.rows[0];
-    const token = await jwt.sign({ id: user.id, isadmin: user.isadmin }, JWT_SECRET);
-    return { token, isadmin: user.isadmin };
+    const token = await jwt.sign({ id: user.id, isAdmin: user.isadmin }, JWT_SECRET);
+    return { token, isAdmin: user.isadmin };
 };
 
 const findUserWithToken = async (token) => {

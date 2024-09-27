@@ -20,6 +20,17 @@ const createTree = async ({ treeName, location, description, image_url }) => {
 }
 };
 
+const editTree = async ({ tree_id, treeName, location, description, image_url }) => {
+    const SQL = /* sql */ `
+    UPDATE trees
+    SET treeName = $2, location = $3, description = $4, image_url = $5
+    WHERE id = $1
+    RETURNING *
+    `;
+    const response = await db.query(SQL, [tree_id, treeName, location, description, image_url]);
+    return response.rows[0];
+};
+
 const deleteTree = async ({ id }) => {
 
     const SQL = /* sql */ `
@@ -147,6 +158,7 @@ const getTreeById = async (id) => {
 
 module.exports = {
     createTree,
+    editTree,
     deleteTree,
     createReview,
     editReview,

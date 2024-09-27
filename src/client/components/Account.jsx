@@ -3,7 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import Modal from "./Modal";
 import CreateTree from "./CreateTree";
 
-export default function Account({ token, setToken, user, setUser }) {
+export default function Account({ token, setToken, user, setUser, isAdmin }) {
     const [successMessage, setSuccessMessage] = useState(null);
     const [error, setError] = useState(null);
     // const [deletedReview, setDeletedReview] = useState(null);
@@ -189,9 +189,10 @@ export default function Account({ token, setToken, user, setUser }) {
                             <h2>Welcome, {user.username}!</h2>
                             <h3>Registered Email Address:</h3>
                             <h3>{user.email}</h3>
+                            {isAdmin && <h3>Adminstrator</h3>}
                         </div>
 
-                        {user.isadmin && (
+                        {isAdmin && (
                             <div className="admin-section">
                                 <h2>Admin Panel</h2>
                                 <CreateTree token={token} />

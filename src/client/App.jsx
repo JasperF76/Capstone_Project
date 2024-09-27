@@ -29,7 +29,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setUser(data.user);
-        setIsAdmin(data.user.isAdmin);
+        setIsAdmin(data.user.isadmin);
       });
     } else {
       setIsAdmin(false);
@@ -54,11 +54,11 @@ function App() {
       )}
       <div>
         <Routes>
-          <Route path="/" element={<Trees setTree={setTree} token={token} isAdmin={user?.isadmin} />} />
+          <Route path="/" element={<Trees setTree={setTree} token={token} isAdmin={isAdmin} />} />
           <Route path="/trees/:id" element={<SingleTree tree={tree} token={token} user={user} />} />
           <Route path="/users/login" element={<Login user={user} setUser={setUser} token={token} setToken={setToken} />} />
           <Route path="/users/register" element={<Register setToken={setToken} />} />
-          <Route path="/users/me" element={<Account token={token} setToken={setToken} user={user} setUser={setUser} />} />
+          <Route path="/users/me" element={<Account token={token} setToken={setToken} user={user} setUser={setUser} isAdmin={isAdmin} />} />
           <Route path="/trees/new_tree" element={isAdmin ? (<CreateTree token={token} />) : (<Navigate to="/" />)} />
         </Routes>
 
@@ -92,7 +92,7 @@ function App() {
           <div className="ticker__item">An average tree can drink up to 2000 liters of water annually. A massive oak tree can drink up to 100 gallons of water out of the ground per day...</div>
           <div className="ticker__item">The most poisonous tree in the world is the manchineel tree, which is native to Florida. If consumed, its fruit can kill a person. Also, standing under the tree during a rainstorm can cause blisters, and the smoke from a burning tree can blind a person...</div>
           <div className="ticker__item">Some trees are used to produce drugs, for instance, the bark of a willow tree is used for producing aspirin, and the Yew tree is used for making drugs such as Taxol...</div>
-          <div className="ticker__item">In the year 2012, a Florida meth-addict named Sarah Barnes accidentally burned down the world’s fifth oldest tree when she tried to smoke in the hollow of the tree. Named Senator, the ancient tree was nearly 3,500 years old...</div>
+          <div className="ticker__item">In the year 2012, a Florida meth-addict named Sarah Barnes accidentally burned down the world’s fifth oldest tree when she tried to smoke in the hollow of the tree. Named "Senator", the ancient tree was nearly 3,500 years old...</div>
           <div className="ticker__item">In 2010 massive floods in areas of Pakistan caused millions of spiders to climb up into the trees to escape the rising water. When the floodwaters receded, the trees were all enveloped in spider webs. Fortunately, the trees still served a useful purpose in reducing the mosquito population in the wake of the floods...</div>
           <div className="ticker__item">Kids living in places with more trees have a lower chance of asthma...</div>
           <div className="ticker__item">Pine trees grow on six of seven continents, with Antarctica being the only one left out...</div>
@@ -115,7 +115,7 @@ function App() {
           <div className="ticker__item">In northern temperate climates, moss grows on the northern side of the tree trunk, where there is more shade, and if you’re in the Northern Hemisphere, you can see the rings of the tree grow slightly thicker on the southern side since it receives more sunlight. In the Southern Hemisphere, the opposite is true, with rings being thicker on the Northern side. Remember that if you ever get lost in the forest...</div>
           <div className="ticker__item">Trees do not heal when they are damaged by regenerating cells as other living organisms do. Instead, a wounded tree protects itself by building a wall around the damaged area, which slows or prevents the disease and decay spread...</div>
           <div className="ticker__item">Trees that grow in humid areas or near massive water bodies have broad, big leaves. Trees that grow in dry environments have small, hard leaves, which decrease water loss...</div>
-          <div className="ticker__item">The parts of a tree that are alive are the root tips, leaves, and the vascular system – the conductive tissue called phloem and xylem (a thin layer under the bark that delivers nutrients and sugars). The tissue that we call “wood” is actually dead cells that simply support structures...</div>
+          <div className="ticker__item">A mature, living tree is about 99% dead. The parts of a tree that are alive are the root tips, leaves, and the vascular system – the conductive tissue called phloem and xylem (a thin layer under the bark that delivers nutrients and sugars). The tissue that we call “wood” is actually dead cells that simply support structures...</div>
           <div className="ticker__item">Three trees, if planted in the right places around a building, can cut air-conditioning costs up to 50%...</div>
           <div className="ticker__item">Trees in a landscape lower heart rates, relax us and decrease stress...</div>
           <div className="ticker__item">Cottonwood seeds can stay airborne for days, which is much longer than any other type of seed...</div>

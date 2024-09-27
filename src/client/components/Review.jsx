@@ -12,52 +12,54 @@ export default function Reviews({ treeId, userId }) {
     const [commentText, setCommentText] = useState("");
     const [selectedReviewId, setSelectedReviewId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const token = localStorage.getItem('token');
 
-    
-        // this function gets all the reviews for a tree on the single tree page
-        async function fetchReviews() {
-            try {
-                const response = await fetch(`http://localhost:3000/api/trees/${treeId}/reviews`);
-                const result = await response.json();
+    // this function gets all the reviews for a tree on the single tree page
+    async function fetchReviews() {
+        try {
+            const response = await fetch(`http://localhost:3000/api/trees/${treeId}/reviews`);
+            const result = await response.json();
 
-                setReviews(result.reviews);
+            setReviews(result.reviews);
 
-                const userReview = result.reviews.find(review => review.user_id === userId);
-                if (userReview) {
-                    setHasUserReviewed(true);
-                }
-
-                for (const review of result.reviews) {
-                    fetchCommentsForReview(review.id);
-                }
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-                console.error('Error fetching reviews:');
+            const userReview = result.reviews.find(review => review.user_id === userId);
+            if (userReview) {
+                setHasUserReviewed(true);
             }
-        }
 
-        // This function gets all the comments for all the reviews on the page
-        async function fetchCommentsForReview(reviewId) {
-            try {
-                const response = await fetch(`http://localhost:3000/api/trees/${treeId}/reviews/${reviewId}/comments`);
-                const result = await response.json();
-
-                setCommentsByReview(prevState => ({
-                    ...prevState,
-                    [reviewId]: result.comments || []
-                }));
-            } catch (error) {
-                console.error(`Error fetching comments for review ${reviewId}:`, error);
+            for (const review of result.reviews) {
+                fetchCommentsForReview(review.id);
             }
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+            console.error('Error fetching reviews:');
         }
-        useEffect(() => {
+    }
+
+    // This function gets all the comments for all the reviews on the page
+    async function fetchCommentsForReview(reviewId) {
+        try {
+            const response = await fetch(`http://localhost:3000/api/trees/${treeId}/reviews/${reviewId}/comments`);
+            const result = await response.json();
+
+            setCommentsByReview(prevState => ({
+                ...prevState,
+                [reviewId]: result.comments || []
+            }));
+        } catch (error) {
+            console.error(`Error fetching comments for review ${reviewId}:`, error);
+        }
+    }
+    useEffect(() => {
         fetchReviews();
     }, [treeId]);
 
-    // This function lets users post a review
+    // HANDLES REVIEW SUBMISSION
     const handleSubmitReview = async (e) => {
         e.preventDefault();
         setLoading(true);
+
+        const token = localStorage.getItem('token');
 
         if (!reviewText || !rating || rating < 1 || rating > 5) {
             setError('Please enter a valid review and a rating between 1 and 5.');
@@ -83,10 +85,10 @@ export default function Reviews({ treeId, userId }) {
 
             const newReview = await response.json();
             setReviews((prevState) => [
-                ...prevState, 
+                ...prevState,
                 newReview
             ]);
-            
+
             setReviewText("");
             setRating("");
             setError("");
@@ -98,7 +100,7 @@ export default function Reviews({ treeId, userId }) {
             setError("Error submitting review.")
             console.error("Error submitting review:");
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
 
@@ -151,37 +153,54 @@ export default function Reviews({ treeId, userId }) {
 
     return (
         <div>
-            {hasUserReviewed ? (
-                <p>You have already submitted a review for this tree.</p>
+            {token ? (
+                hasUserReviewed ? (
+                    <p>You have already submitted a review for this tree.</p>
+                ) : (
+                    <form onSubmit={handleSubmitReview}>
+                        <div>
+                            <label>Love this tree? Leave a review!</label>
+                            <textarea
+                                id="review"
+                                value={reviewText}
+                                onChange={(e) => setReviewText(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="rating">Rating (1-5):</label>
+                            <input
+                                type="number"
+                                id="rating"
+                                value={rating}
+                                onChange={(e) => setRating(e.target.value)}
+                                min="1"
+                                max="5"
+                                required
+                            />
+                        </div>
+                        <button type="submit" disabled={loading}>
+                            {loading ? 'Submitting...' : 'Submit Review'}
+                        </button>
+                    </form>
+                )
             ) : (
-                <form onSubmit={handleSubmitReview}>
-                    <div>
-                        <label>Love this tree? Leave a review!</label>
-                        <textarea
-                            id="review"
-                            value={reviewText}
-                            onChange={(e) => setReviewText(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="rating">Rating (1-5):</label>
-                        <input
-                            type="number"
-                            id="rating"
-                            value={rating}
-                            onChange={(e) => setRating(e.target.value)}
-                            min="1"
-                            max="5"
-                            required
-                        />
-                    </div>
-                    <button type="submit" disabled={loading}>
-                        {loading ? 'Submitting...' : 'Submit Review'}
-                    </button>
-                </form>
+                <p>Please log in to leave a review.</p>
             )}
+
+
             <h2 className="review h2">Reviews</h2>
+
+            {reviews.length > 0 && (
+                <div className="average-rating">
+                    <h3>Average Rating:
+                        {(
+                            reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
+                        ).toFixed(1)} / 5
+                    </h3>
+                </div>
+            )}
+
             {
                 reviews.length > 0 ? (
                     reviews.map((review) => (
@@ -204,7 +223,9 @@ export default function Reviews({ treeId, userId }) {
                                 )}
                             </div>
 
-                            <button onClick={() => openCommentModal(review.id)}>Reply</button>
+                            {token && (
+                                <button onClick={() => openCommentModal(review.id)}>Reply</button>
+                            )}
                         </div>
                     ))
                 ) : (

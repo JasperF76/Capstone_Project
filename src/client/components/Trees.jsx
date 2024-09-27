@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import EditTree from "./EditTree";
 
 export default function Trees({ setTree, isAdmin, token }) {
     const [treesList, setTreesList] = useState([]);
     const [error, setError] = useState(null);
     const [searchParam, setSearchParam] = useState("");
+    const [selectedTree, setSelectedTree] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const navigate = useNavigate();
 
     async function AllTrees(setTree) {
@@ -49,6 +52,24 @@ export default function Trees({ setTree, isAdmin, token }) {
         }
     }
 
+    const handleEditClick = (tree) => {
+        setSelectedTree(tree);
+        setIsEditModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsEditModalOpen(false);
+        setSelectedTree(null);
+    };
+
+    const handleTreeUpdate = (updatedTree) => {
+        setTreesList((prevList) =>
+            prevList.map((tree) =>
+            tree.id === updatedTree.id ? updatedTree : tree
+        )
+        );
+    };
+
     useEffect(() => {
         AllTrees();
     }, []);
@@ -84,17 +105,33 @@ export default function Trees({ setTree, isAdmin, token }) {
                         }}>Learn More!</button>
 
                         {isAdmin && (
+                            <>
+                            <button
+                            className="edit-button"
+                            onClick={() => handleEditClick(tree)}
+                            >
+                                Edit Tree
+                            </button>
                             <button 
                             className="delete-button"
                             onClick={() => deleteTree(tree.id)}
                             >
                                 Delete Tree
                             </button>
+                            </>
                         )}
                     </div>
                 )
             })}
+            {isEditModalOpen && (
+                <EditTree
+                    token={token}
+                    tree={selectedTree}
+                    closeModal={closeModal}
+                    onUpdate={handleTreeUpdate}
+                    />
+            )}
         </>
-    )
+    );
 
 }
