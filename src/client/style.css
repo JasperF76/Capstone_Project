@@ -239,7 +239,7 @@ form button:hover {
 /* Styling for the scrolling ticker */
 :root {
   --height: 30px;
-  --speed: 1100s;
+  --speed: 1800s;
 }
 
 * {
@@ -610,7 +610,8 @@ p {
   /* Light cream background */
   padding: 40px;
   font-family: 'Cormorant Garamond', serif;
-  color: #3e8f42; /* Earthy green */
+  color: #3e8f42;
+  /* Earthy green */
 }
 
 .about_header h1 {
@@ -628,7 +629,9 @@ p {
 }
 
 /* Flexbox layout for paragraphs and images */
-.paragraph_1, .paragraph_2, .paragraph_3 {
+.paragraph_1,
+.paragraph_2,
+.paragraph_3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -639,7 +642,8 @@ p {
 .about_body p {
   font-size: 18px;
   line-height: 1.6;
-  color: #3A2F29; /* Dark brown */
+  color: #3A2F29;
+  /* Dark brown */
   width: 60%;
 }
 
@@ -654,7 +658,8 @@ p {
 /* Styling for the footer section */
 .about_body strong {
   font-size: 20px;
-  color: #2e7d32; /* Darker green for emphasis */
+  color: #2e7d32;
+  /* Darker green for emphasis */
 }
 
 .about_body div:last-child {
