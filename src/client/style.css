@@ -79,7 +79,6 @@ a {
   transition: transform 0.3s ease;
 }
 
-
 .alltrees:hover {
   transform: scale(1.05);
 }
@@ -119,8 +118,8 @@ a {
   border-radius: 8px 8px 0 0;
 }
 
-/* Styling for each trees single page. */
 
+/* Styling for each trees single page. */
 .singletree {
   background-color: #f5f5f5;
   padding: 20px;
@@ -317,6 +316,7 @@ form button:hover {
   }
 }
 
+
 /* Nav Bar Styling*/
 .navbar {
   background-color: #004d40;
@@ -486,6 +486,7 @@ p {
   margin: 10px 0;
 }
 
+
 /* Styling for the modal.
 /* Modal background overlay */
 .modal-overlay {
@@ -600,4 +601,67 @@ p {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+/* About Page Styling */
+.about_header {
+  background-color: #f0efe9;
+  /* Light cream background */
+  padding: 40px;
+  font-family: 'Cormorant Garamond', serif;
+  color: #3e8f42; /* Earthy green */
+}
+
+.about_header h1 {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #2c5d3f;
+  padding-top: 80px;
+}
+
+.about_body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Flexbox layout for paragraphs and images */
+.paragraph_1, .paragraph_2, .paragraph_3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+/* Text styling */
+.about_body p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #3A2F29; /* Dark brown */
+  width: 60%;
+}
+
+/* Image styling */
+.arborist_image {
+  width: 35%;
+  border-radius: 8px;
+  margin-left: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the footer section */
+.about_body strong {
+  font-size: 20px;
+  color: #2e7d32; /* Darker green for emphasis */
+}
+
+.about_body div:last-child {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #cce7d0;
+  /* Light green background for the special thanks section */
+  border-radius: 10px;
+  font-size: 18px;
 }

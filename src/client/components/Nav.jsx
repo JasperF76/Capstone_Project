@@ -19,6 +19,7 @@ export default function Nav({ token, setToken, user, setUser,setIsAdmin }) {
                         <span className="nav-username">{user?.username ?? 'User'}</span>
                         <Link className="nav-link" to="/">Home</Link>
                         <Link className="nav-link" to="/users/me">Account</Link>
+                        <Link className="nav-link" to="/about">About</Link>
                         <button className="nav-button" onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
@@ -26,6 +27,7 @@ export default function Nav({ token, setToken, user, setUser,setIsAdmin }) {
                         <Link className="nav-link" to="/">Home</Link>
                         <Link className="nav-link" to="/users/register">Register</Link>
                         <Link className="nav-link" to="/users/login">Login</Link>
+                        <Link className="nav-link" to="/about">About</Link>
                     </>
                 )}
             </div>

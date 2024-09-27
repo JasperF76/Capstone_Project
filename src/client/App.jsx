@@ -8,6 +8,7 @@ import SingleTree from './components/SingleTree';
 import Nav from './components/Nav';
 import Account from './components/Account';
 import CreateTree from './components/CreateTree';
+import About from './components/About';
 import MainPageImage from './assets/AnimatedForest.gif';
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <Route path="/users/register" element={<Register setToken={setToken} />} />
           <Route path="/users/me" element={<Account token={token} setToken={setToken} user={user} setUser={setUser} isAdmin={isAdmin} />} />
           <Route path="/trees/new_tree" element={isAdmin ? (<CreateTree token={token} />) : (<Navigate to="/" />)} />
+          <Route path="/about" element={<About />} />
         </Routes>
 
         {/* Ticker Facts */}
