@@ -108,7 +108,7 @@ treesRouter.get('/:id/reviews', async (req, res, next) => {
         }
 
         res.status(200).send({
-            reviews
+            reviews,
         });
     } catch (error) {
         console.error('Error fetching reviews:', error);

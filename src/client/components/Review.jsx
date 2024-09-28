@@ -21,20 +21,20 @@ export default function Reviews({ treeId, userId }) {
             const result = await response.json();
 
             setReviews(result.reviews);
-
+            
             const userReview = result.reviews.find(review => review.user_id === userId);
             if (userReview) {
                 setHasUserReviewed(true);
             }
+            
+            result.reviews.forEach(review => fetchCommentsForReview(review.id));
 
-            for (const review of result.reviews) {
-                fetchCommentsForReview(review.id);
-            }
         } catch (error) {
             console.error('Error fetching reviews:', error);
             console.error('Error fetching reviews:');
         }
     }
+
 
     // This function gets all the comments for all the reviews on the page
     async function fetchCommentsForReview(reviewId) {
@@ -50,9 +50,11 @@ export default function Reviews({ treeId, userId }) {
             console.error(`Error fetching comments for review ${reviewId}:`, error);
         }
     }
+
     useEffect(() => {
         fetchReviews();
     }, [treeId]);
+
 
     // HANDLES REVIEW SUBMISSION
     const handleSubmitReview = async (e) => {
@@ -78,7 +80,6 @@ export default function Reviews({ treeId, userId }) {
                 body: JSON.stringify({
                     text: reviewText,
                     rating: Number(rating),
-                    user_id: userId,
                     tree_id: treeId,
                 }),
             });
@@ -88,13 +89,14 @@ export default function Reviews({ treeId, userId }) {
                 ...prevState,
                 newReview
             ]);
+            setHasUserReviewed(true);
 
             setReviewText("");
             setRating("");
             setError("");
-            setHasUserReviewed(true);
+            
 
-            fetchReviews();
+            // fetchReviews();
 
         } catch (error) {
             setError("Error submitting review.")
@@ -125,8 +127,7 @@ export default function Reviews({ treeId, userId }) {
                 },
                 body: JSON.stringify({
                     text: commentText,
-                    user_id: userId,
-                    review_id: selectedReviewId
+                    review_id: selectedReviewId,
                 }),
             });
 

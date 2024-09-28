@@ -189,7 +189,7 @@ export default function Account({ token, setToken, user, setUser, isAdmin }) {
                             <h2>Welcome, {user.username}!</h2>
                             <h3>Registered Email Address:</h3>
                             <h3>{user.email}</h3>
-                            {isAdmin && <h3>Adminstrator</h3>}
+                            {isAdmin && <h3>Administrator</h3>}
                         </div>
 
                         {isAdmin && (
