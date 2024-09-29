@@ -526,7 +526,7 @@ p {
 }
 
 /* Close button */
-.modal-content button.close-btn {
+/* .modal-content button.close-btn {
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -535,7 +535,7 @@ p {
   top: 15px;
   right: 20px;
   cursor: pointer;
-}
+} */
 
 /* Modal header */
 .modal-content h2 {
@@ -669,4 +669,275 @@ p {
   /* Light green background for the special thanks section */
   border-radius: 10px;
   font-size: 18px;
+}
+
+
+
+
+/* Mobile Styles (Up to 768px width - Tablets and Phones) */
+@media only screen and (max-width: 768px) {
+  body {
+    border: none;
+    padding: 0px;
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+
+  .navbar {
+    position: relative;
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .navbar-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mainpage input {
+    width: 80%;
+  }
+
+  .alltrees {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+
+  .alltrees img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .singletree {
+    margin: 0;
+    padding: 10px;
+  }
+
+  .singletree h1 {
+    font-size: 32px;
+    padding-top: 50px;
+  }
+
+  .singletree-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  form textarea,
+  form input[type="number"] {
+    font-size: 14px;
+  }
+
+  .about_body {
+    padding: 10px;
+  }
+
+  .paragraph_1,
+  .paragraph_2,
+  .paragraph_3 {
+    flex-direction: column;
+  }
+
+  .about_body p {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .arborist_image {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+/* Small Mobile Styles (Up to 480px width - Phones) */
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar-container {
+    gap: 5px;
+  }
+
+  .main-header {
+    padding-top: 50px;
+  }
+
+  .alltrees h3 {
+    font-size: 20px;
+  }
+
+  .alltrees button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  form textarea,
+  form input[type="number"] {
+    padding: 5px;
+  }
+
+  .review {
+    padding: 10px;
+  }
+
+  .review p {
+    font-size: 14px;
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .about_body p {
+    font-size: 14px;
+  }
+}
+
+/* Media query for tablets and mobile devices */
+@media only screen and (max-width: 768px) {
+  /* Adjust general layout for smaller screens */
+
+  /* Adjustments for screens 480px and below */
+@media only screen and (max-width: 480px) {
+  .user-account input,
+  .user-account textarea,
+  .modal-content input,
+  .modal-content textarea {
+    width: 100%;  /* Ensure inputs are fully contained */
+    font-size: 0.9rem;
+  }
+
+  .modal-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .modal-content .modal-buttons {
+    flex-direction: column;  /* Stack buttons on small screens */
+  }
+
+  .modal-content button {
+    width: 100%;  /* Full width buttons */
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+
+  .modal-content button.close-btn {
+    font-size: 0.9rem;
+    padding-top: 0px;
+  }
+}
+
+
+  .user-account {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .user-account h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .user-account h3 {
+    font-size: 1.5rem;
+  }
+
+  .user-account p {
+    font-size: 1rem;
+  }
+
+  .user-account button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .user-account div {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  /* Make modal full-width on mobile */
+  .modal-content {
+    width: 90%;
+    max-width: none;
+    padding: 20px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-content button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+  
+  /* Adjust input fields and buttons inside modal */
+  .modal-content textarea,
+  .modal-content input[type="number"] {
+    font-size: 0.9rem;
+  }
+
+  /* Close button in the modal */
+  .modal-content button.close-btn {
+    font-size: 1.2rem;
+  }
+}
+
+/* Media query for very small screens (phones) */
+@media only screen and (max-width: 480px) {
+  /* Further scaling for small phones */
+  .user-account h2 {
+    font-size: 1.8rem;
+  }
+
+  .user-account h3 {
+    font-size: 1.4rem;
+  }
+
+  .user-account p {
+    font-size: 0.9rem;
+  }
+
+  .user-account button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  /* Modal specific for small phones */
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .modal-content button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .modal-content button.close-btn {
+    font-size: 1.1rem;
+  }
+
+  .modal-content textarea,
+  .modal-content input[type="number"] {
+    font-size: 0.8rem;
+  }
 }

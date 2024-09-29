@@ -35,9 +35,10 @@ export default function Register({ token, setToken }) {
     }
 
     return (
-        <>
+        <div className="register-form">
             {error && <p>{error}</p>}
-            <form className="register-form" onSubmit={handleRegistration}>
+            
+            <form  onSubmit={handleRegistration}>
                 <div>
                     <h2>Register</h2>
                     <label htmlFor="username">Username: </label>
@@ -68,9 +69,11 @@ export default function Register({ token, setToken }) {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    </div>
                     <button type="submit">Login</button>
-                </div>
+                
             </form>
-        </>
+            </div>
+        
     )
 };
