@@ -25,11 +25,6 @@ h1 {
   padding-bottom: 20px;
 }
 
-/* p,
-li,
-a {
-  font-family: 'Open Sans', sans-serif;
-} */
 
 .main-header {
   padding-top: 100px;
@@ -55,17 +50,6 @@ a {
   margin-left: 20px;
   color: #666;
 }
-
-/* .singletree {
-  padding-bottom: 50px;
-  padding-top: 80px;
-  padding-left: 5px;
-}
-
-.singletree-img {
-  display: flex;
-  justify-content: center;
-} */
 
 
 /* Main Page Display of Trees */
@@ -203,15 +187,6 @@ form button:hover {
   /* Dark brown */
 }
 
-/* .review h2 {
-  font-size: 2.5rem;
-  color: #2E8B57;
-  text-align: center;
-  padding: 20px 0;
-  font-family: 'Cormorant Garamond', serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-} */
 
 .review h3 {
   color: #4C7A57;
@@ -525,17 +500,7 @@ p {
   /* Smooth fade-in animation */
 }
 
-/* Close button */
-/* .modal-content button.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #333;
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  cursor: pointer;
-} */
+
 
 /* Modal header */
 .modal-content h2 {

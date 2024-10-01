@@ -1,8 +1,13 @@
 import MeInATree from '../assets/Me_in_a_tree.jpg';
 import MeWithASaw from '../assets/Me_with_a_saw.jpg';
 import MeCoding from '../assets/Me_coding.jpg';
+import { useEffect } from 'react';
 
 export default function About() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className='about_header'>
@@ -15,7 +20,7 @@ export default function About() {
                         However, work as an arborist is very physically demanding, and there are numerous ways one can be injured doing my former job.
                         A back injury had me off of work for an entire year in 2020, followed by a neck injury that sidelined me for another 2 years in 2022, and those two injuries ultimately lead to me being unable to return to the profession that I'd dedicated more than half of my life to.
                     </p>
-<img src={MeInATree} alt="Me climbing" className='arborist_image' />
+                    <img src={MeInATree} alt="Me climbing" className='arborist_image' />
                 </div>
 
                 <div className="paragraph_2">
@@ -25,11 +30,11 @@ export default function About() {
                         And hopefully, fingers crossed, that new career is going to be as a software developer! After 3 months of intense training at Cleveland State University's Fullstack Academy that was equal parts rewarding and <i>frustrating</i>, I have managed to build this, my very first website.
                         When my bootcamp instructor (hi Mark!) suggested that our final project should perhaps be something that we are passionate about, I knew right away that my capstone would have something to do with trees.
                     </p>
-                    
+
                 </div>
 
                 <div className='paragraph_3'>
-                    
+
                     <p>
                         And so I give you, "Trees of the World," a website dedicated to my love of trees, and that bridges my former profession to my new one.
                         This site introduces you to some of the more iconic trees around the world, from the world's oldest known tree, Methuselah, to the world's largest tree by volume, General Sherman.
@@ -37,7 +42,7 @@ export default function About() {
                         My hope is that after viewing the amazing trees on this website, you'll come away with a newfound respect and appreciation for your silent neighbors, and for all that they do for us.
                         And by creating and regularly updating this 'labor of love' project of mine, I can stay connected to the profession that I loved.
                     </p>
-<img src={MeCoding} alt="Me at my computer" className='arborist_image' />
+                    <img src={MeCoding} alt="Me at my computer" className='arborist_image' />
                 </div>
                 <br /><br />
                 <p>
